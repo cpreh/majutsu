@@ -95,7 +95,7 @@ fcppt_utils_generate_config()
 
 install(
 	DIRECTORY
-	${CMAKE_SOURCE_DIR}/include
+	${CMAKE_SOURCE_DIR}/include/
 	DESTINATION
 	${INSTALL_INCLUDE_DIR}
 )
