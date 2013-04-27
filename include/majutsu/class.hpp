@@ -130,7 +130,7 @@ class_(\
 		majutsu::memory::init_count<\
 			memory_type\
 		>::value == n,\
-		"You have to prodive the right amount of parameters for a class_ constructor"\
+		"You have to provide the right amount of parameters for a class_ constructor"\
 	);\
 }
 
@@ -168,7 +168,7 @@ BOOST_PP_REPEAT_FROM_TO(
 			== boost::mpl::size<
 				Vector
 			>::value,
-			"You have to prodive the right amount of parameters for a class_ constructor"\
+			"You have to provide the right amount of parameters for a class_ constructor"\
 		);
 	}
 

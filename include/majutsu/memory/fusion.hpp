@@ -181,6 +181,12 @@ public:
 			elements_
 		) = _value;
 	}
+
+	tuple const &
+	impl() const
+	{
+		return elements_;
+	}
 private:
 	tuple elements_;
 };

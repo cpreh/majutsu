@@ -45,7 +45,6 @@ set(
 	include/majutsu/constant.hpp
 	include/majutsu/constant_fwd.hpp
 	include/majutsu/detail/copy_n.hpp
-	include/majutsu/detail/copy_subelements.hpp
 	include/majutsu/detail/find_role.hpp
 	include/majutsu/detail/make_iterators.hpp
 	include/majutsu/detail/unwrap_role.hpp
@@ -74,7 +73,6 @@ set(
 	include/majutsu/role_return_type.hpp
 	include/majutsu/simple.hpp
 	include/majutsu/size_type.hpp
-	include/majutsu/subelements.hpp
 )
 
 fcppt_utils_add_source_groups(
