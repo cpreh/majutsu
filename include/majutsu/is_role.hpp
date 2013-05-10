@@ -42,7 +42,8 @@ template<
 struct is_role
 :
 std::false_type
-{};
+{
+};
 
 template<
 	typename Type,
@@ -56,7 +57,8 @@ struct is_role<
 >
 :
 std::true_type
-{};
+{
+};
 
 FCPPT_PP_POP_WARNING
 

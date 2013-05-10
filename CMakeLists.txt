@@ -35,26 +35,24 @@ set(
 	include/majutsu/bind.hpp
 	include/majutsu/class.hpp
 	include/majutsu/composite.hpp
-	include/majutsu/concepts/dynamic_memory/make.hpp
-	include/majutsu/concepts/dynamic_memory/needed_size.hpp
-	include/majutsu/concepts/dynamic_memory/place.hpp
-	include/majutsu/concepts/dynamic_memory/tag.hpp
-	include/majutsu/concepts/static_memory/tag.hpp
-	include/majutsu/concepts/static_size.hpp
 	include/majutsu/const_raw_pointer.hpp
 	include/majutsu/constant.hpp
 	include/majutsu/constant_fwd.hpp
 	include/majutsu/detail/copy_n.hpp
 	include/majutsu/detail/find_role.hpp
 	include/majutsu/detail/make_iterators.hpp
+	include/majutsu/detail/static_size_base.hpp
 	include/majutsu/detail/unwrap_role.hpp
 	include/majutsu/detail/wrapped_type.hpp
+	include/majutsu/dispatch_value.hpp
 	include/majutsu/extract_constant.hpp
 	include/majutsu/flatten.hpp
 	include/majutsu/fundamental.hpp
 	include/majutsu/integral_size.hpp
 	include/majutsu/is_constant.hpp
 	include/majutsu/is_role.hpp
+	include/majutsu/is_static_size.hpp
+	include/majutsu/make.hpp
 	include/majutsu/memory/detail/expand_fusion_initlist.hpp
 	include/majutsu/memory/detail/index_of.hpp
 	include/majutsu/memory/detail/init_constants.hpp
@@ -65,6 +63,8 @@ set(
 	include/majutsu/memory/init_count.hpp
 	include/majutsu/memory/needs_init.hpp
 	include/majutsu/memory/raw.hpp
+	include/majutsu/needed_size.hpp
+	include/majutsu/place.hpp
 	include/majutsu/placeholder.hpp
 	include/majutsu/raw_data.hpp
 	include/majutsu/raw_pointer.hpp
@@ -73,6 +73,7 @@ set(
 	include/majutsu/role_return_type.hpp
 	include/majutsu/simple.hpp
 	include/majutsu/size_type.hpp
+	include/majutsu/static_size.hpp
 )
 
 fcppt_utils_add_source_groups(

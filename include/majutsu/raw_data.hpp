@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_RAW_DATA_HPP_INCLUDED
 #define MAJUTSU_RAW_DATA_HPP_INCLUDED
 
+
 namespace majutsu
 {
 

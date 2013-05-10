@@ -57,7 +57,7 @@ struct flatten<
 		typename Type::type,
 		boost::mpl::vector0<>,
 		boost::mpl::copy<
-			flatten<
+			majutsu::flatten<
 				boost::mpl::_2
 			>,
 			boost::mpl::back_inserter<

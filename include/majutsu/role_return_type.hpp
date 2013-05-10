@@ -29,6 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <boost/mpl/deref.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace majutsu
 {
 
@@ -42,12 +43,13 @@ template<
 struct role_return_type
 :
 boost::mpl::deref<
-	typename detail::find_role<
+	typename majutsu::detail::find_role<
 		Elements,
 		Role
 	>::type
 >::type
-{};
+{
+};
 
 FCPPT_PP_POP_WARNING
 

@@ -45,7 +45,7 @@ struct bind
 		boost::mpl::if_<
 			std::is_same<
 				boost::mpl::_2,
-				placeholder
+				majutsu::placeholder
 			>,
 			boost::mpl::_1,
 			boost::mpl::_2

@@ -43,7 +43,8 @@ template<
 struct is_constant
 :
 std::false_type
-{};
+{
+};
 
 template<
 	typename T,
@@ -57,7 +58,8 @@ struct is_constant<
 >
 :
 std::true_type
-{};
+{
+};
 
 template<
 	typename T,
@@ -75,7 +77,8 @@ struct is_constant<
 >
 :
 std::true_type
-{};
+{
+};
 
 FCPPT_PP_POP_WARNING
 

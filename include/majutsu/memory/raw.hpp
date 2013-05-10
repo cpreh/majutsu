@@ -1,23 +1,3 @@
-/*
-spacegameengine is a portable easy to use game engine written in C++.
-Copyright (C) 2006-2013 Carl Philipp Reh (sefi@s-e-f-i.de)
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
-
-
 #ifndef MAJUTSU_MEMORY_RAW_HPP_INCLUDED
 #define MAJUTSU_MEMORY_RAW_HPP_INCLUDED
 
@@ -26,13 +6,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <majutsu/flatten.hpp>
 #include <majutsu/is_constant.hpp>
 #include <majutsu/is_role.hpp>
+#include <majutsu/make.hpp>
+#include <majutsu/needed_size.hpp>
+#include <majutsu/place.hpp>
 #include <majutsu/raw_data.hpp>
 #include <majutsu/raw_pointer.hpp>
 #include <majutsu/role_return_type.hpp>
-#include <majutsu/size_type.hpp>
-#include <majutsu/concepts/dynamic_memory/make.hpp>
-#include <majutsu/concepts/dynamic_memory/needed_size.hpp>
-#include <majutsu/concepts/dynamic_memory/place.hpp>
 #include <majutsu/detail/find_role.hpp>
 #include <majutsu/detail/make_iterators.hpp>
 #include <majutsu/detail/wrapped_type.hpp>
@@ -69,28 +48,28 @@ template<
 class raw
 {
 public:
-	typedef raw_data value_type;
+	typedef majutsu::raw_data value_type;
 private:
-	typedef typename flatten<
+	typedef typename majutsu::flatten<
 		Type
 	>::type flattened_types;
 
 	typedef std::array<
-		size_type,
+		majutsu::size_type,
 		boost::mpl::size<
 			flattened_types
 		>::value
 	> size_vector;
 
-	typedef detail::store<
+	typedef majutsu::memory::detail::store<
 		value_type
 	> storage_type;
 public:
 	typedef flattened_types types; // TODO
 
-	typedef raw_pointer pointer;
+	typedef majutsu::raw_pointer pointer;
 
-	typedef const_raw_pointer const_pointer;
+	typedef majutsu::const_raw_pointer const_pointer;
 
 	raw()
 	:
@@ -117,7 +96,7 @@ public:
 				flattened_types
 			>::type,
 			boost::mpl::not_<
-				needs_init<
+				majutsu::memory::needs_init<
 					boost::mpl::deref<
 						boost::mpl::_1
 					>
@@ -130,8 +109,8 @@ public:
 				_arguments,
 				types_to_init()
 			),
-			detail::init_raw_memory<
-				memory::raw<
+			majutsu::memory::detail::init_raw_memory<
+				majutsu::memory::raw<
 					Type
 				>
 			>(
@@ -151,7 +130,7 @@ public:
 		>::type const &_value
 	)
 	{
-		set_internal<
+		this->set_internal<
 			typename majutsu::detail::find_role<
 				flattened_types,
 				Role
@@ -179,26 +158,27 @@ public:
 			role_iter
 		>::type found_role;
 
-		typedef typename access_role<
+		typedef typename majutsu::access_role<
 			found_role
 		>::type elem;
 
-		size_type const index(
-			detail::index_of<
+		majutsu::size_type const index(
+			majutsu::memory::detail::index_of<
 				flattened_types,
 				role_iter
 			>::value
 		);
 
 		return
-			concepts::dynamic_memory::make<
+			majutsu::make<
 				elem
 			>(
 				store_.data()
-				+ std::accumulate(
+				+
+				std::accumulate(
 					sizes_.begin(),
 					sizes_.begin() + index,
-					0
+					0u
 				)
 			);
 	}
@@ -215,7 +195,7 @@ public:
 		return store_.data();
 	}
 
-	size_type
+	majutsu::size_type
 	size() const
 	{
 		return store_.size();
@@ -235,8 +215,8 @@ private:
 				flattened_types
 			>::type
 		>(
-			detail::init_constants<
-				raw<
+			majutsu::memory::detail::init_constants<
+				majutsu::memory::raw<
 					Type
 				>
 			>(
@@ -263,22 +243,22 @@ public:
 			deref_elem
 		>::type element;
 
-		size_type const index(
-			detail::index_of<
+		majutsu::size_type const index(
+			majutsu::memory::detail::index_of<
 				flattened_types,
 				Iterator
 			>::value
 		);
 
-		size_type const needed_size(
-			concepts::dynamic_memory::needed_size<
+		majutsu::size_type const needed_size(
+			majutsu::needed_size<
 				element
 			>(
 				_value
 			)
 		);
 
-		size_type const offset(
+		majutsu::size_type const offset(
 			std::accumulate(
 				sizes_.begin(),
 				sizes_.begin()
@@ -291,7 +271,7 @@ public:
 			store_.begin() + offset
 		);
 
-		size_type const cur_size(
+		majutsu::size_type const cur_size(
 			sizes_[
 				index
 			]
@@ -310,7 +290,7 @@ public:
 				place + cur_size - needed_size
 			);
 
-		concepts::dynamic_memory::place<
+		majutsu::place<
 			element
 		>(
 			_value,

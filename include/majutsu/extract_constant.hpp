@@ -39,12 +39,12 @@ template<
 struct extract_constant
 {
 private:
-	typedef typename flatten<
+	typedef typename majutsu::flatten<
 		Types
 	>::type flattened_types;
 
 	typedef typename boost::mpl::deref<
-		typename detail::find_role<
+		typename majutsu::detail::find_role<
 			flattened_types,
 			Role
 		>::type

@@ -23,10 +23,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <majutsu/raw_data.hpp>
 
+
 namespace majutsu
 {
 
-typedef raw_data const *const_raw_pointer;
+typedef majutsu::raw_data const *const_raw_pointer;
 
 }
 

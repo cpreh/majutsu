@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <fcppt/config/external_end.hpp>
 
 namespace majutsu
+
 {
 
 FCPPT_PP_PUSH_WARNING
@@ -41,10 +42,11 @@ template<
 struct integral_size
 :
 boost::mpl::integral_c<
-	size_type,
+	majutsu::size_type,
 	Size
 >
-{};
+{
+};
 
 FCPPT_PP_POP_WARNING
 

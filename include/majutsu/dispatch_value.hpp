@@ -18,43 +18,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MAJUTSU_CONCEPTS_DYNAMIC_MEMORY_PLACE_HPP_INCLUDED
-#define MAJUTSU_CONCEPTS_DYNAMIC_MEMORY_PLACE_HPP_INCLUDED
-
-#include <majutsu/raw_pointer.hpp>
-#include <majutsu/concepts/dynamic_memory/tag.hpp>
+#ifndef MAJUTSU_DISPATCH_VALUE_HPP_INCLUDED
+#define MAJUTSU_DISPATCH_VALUE_HPP_INCLUDED
 
 
 namespace majutsu
 {
-namespace concepts
-{
-namespace dynamic_memory
-{
 
 template<
-	typename Element
+	typename T
 >
-void
-place(
-	typename Element::type const &_value,
-	raw_pointer const _place
-)
+T const *
+dispatch_value()
 {
-	place(
-		static_cast<
-			tag const *
-		>(0),
-		static_cast<
-			Element const *
-		>(0),
-		_value,
-		_place
-	);
+	return
+		nullptr;
 }
 
-}
-}
 }
 
 #endif

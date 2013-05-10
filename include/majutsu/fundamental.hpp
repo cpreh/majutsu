@@ -25,8 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <majutsu/integral_size.hpp>
 #include <majutsu/raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
-#include <majutsu/concepts/static_size.hpp>
-#include <majutsu/concepts/static_memory/tag.hpp>
+#include <majutsu/static_size.hpp>
 #include <majutsu/detail/copy_n.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -55,9 +54,6 @@ struct fundamental
 	);
 };
 
-namespace concepts
-{
-
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
@@ -78,14 +74,11 @@ majutsu::integral_size<
 
 FCPPT_PP_POP_WARNING
 
-}
-
 template<
 	typename Type
 >
 void
 place(
-	majutsu::concepts::static_memory::tag const *,
 	majutsu::fundamental<
 		Type
 	> const *,
@@ -99,7 +92,7 @@ place(
 		>(
 			&_value
 		),
-		majutsu::concepts::static_size<
+		majutsu::static_size<
 			majutsu::fundamental<
 				Type
 			>
@@ -113,7 +106,6 @@ template<
 >
 Type
 make(
-	majutsu::concepts::static_memory::tag const *,
 	majutsu::fundamental<
 		Type
 	> const *,
@@ -124,7 +116,7 @@ make(
 
 	majutsu::detail::copy_n(
 		_memory,
-		majutsu::concepts::static_size<
+		majutsu::static_size<
 			majutsu::fundamental<
 				Type
 			>

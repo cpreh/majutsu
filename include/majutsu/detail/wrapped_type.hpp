@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MAJUTSU_DETAIL_WRAPPED_TYPE_HPP_INCLUDED
 
 #include <majutsu/access_role.hpp>
-#include <majutsu/role.hpp>
+#include <majutsu/role_fwd.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -49,19 +49,20 @@ template<
 	typename Alias
 >
 struct wrapped_type<
-	role<
+	majutsu::role<
 		Wrapped,
 		Alias
 	>
 >
 :
-access_role<
-	role<
+majutsu::access_role<
+	majutsu::role<
 		Wrapped,
 		Alias
 	>
 >
-{};
+{
+};
 
 FCPPT_PP_POP_WARNING
 

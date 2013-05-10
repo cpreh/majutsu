@@ -21,7 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_ACCESS_ROLE_HPP_INCLUDED
 #define MAJUTSU_ACCESS_ROLE_HPP_INCLUDED
 
-#include <majutsu/role.hpp>
+#include <majutsu/role_fwd.hpp>
+
 
 namespace majutsu
 {
@@ -36,7 +37,7 @@ template<
 	typename Alias
 >
 struct access_role<
-	role<
+	majutsu::role<
 		T,
 		Alias
 	>
