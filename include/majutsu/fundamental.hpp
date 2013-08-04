@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MAJUTSU_FUNDAMENTAL_HPP_INCLUDED
 
 #include <majutsu/const_raw_pointer.hpp>
-#include <majutsu/fundamental_fwd.hpp>
+#include <majutsu/fundamental_decl.hpp>
 #include <majutsu/integral_size.hpp>
 #include <majutsu/raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
@@ -31,29 +31,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <type_traits>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
 {
-
-template<
-	typename T
->
-struct fundamental
-{
-	typedef T type;
-
-
-	static_assert(
-		std::is_fundamental<
-			T
-		>::value,
-		"T must be fundamental"
-	);
-};
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)

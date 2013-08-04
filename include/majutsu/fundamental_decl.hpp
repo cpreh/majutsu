@@ -18,17 +18,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MAJUTSU_PLACEHOLDER_HPP_INCLUDED
-#define MAJUTSU_PLACEHOLDER_HPP_INCLUDED
+#ifndef MAJUTSU_FUNDAMENTAL_DECL_HPP_INCLUDED
+#define MAJUTSU_FUNDAMENTAL_DECL_HPP_INCLUDED
 
-#include <majutsu/placeholder_fwd.hpp>
+#include <majutsu/fundamental_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <type_traits>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
 {
 
-struct placeholder
+template<
+	typename T
+>
+struct fundamental
 {
+	typedef T type;
+
+
+	static_assert(
+		std::is_fundamental<
+			T
+		>::value,
+		"T must be fundamental"
+	);
 };
 
 }

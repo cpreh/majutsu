@@ -18,18 +18,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MAJUTSU_PLACEHOLDER_HPP_INCLUDED
-#define MAJUTSU_PLACEHOLDER_HPP_INCLUDED
-
-#include <majutsu/placeholder_fwd.hpp>
+#ifndef MAJUTSU_PLACEHOLDER_FWD_HPP_INCLUDED
+#define MAJUTSU_PLACEHOLDER_FWD_HPP_INCLUDED
 
 
 namespace majutsu
 {
 
-struct placeholder
-{
-};
+struct placeholder;
 
 }
 
