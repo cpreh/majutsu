@@ -18,22 +18,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MAJUTSU_COMPOSITE_HPP_INCLUDED
-#define MAJUTSU_COMPOSITE_HPP_INCLUDED
-
-#include <majutsu/composite_fwd.hpp>
+#ifndef MAJUTSU_BIND_FWD_HPP_INCLUDED
+#define MAJUTSU_BIND_FWD_HPP_INCLUDED
 
 
 namespace majutsu
 {
 
 template<
-	typename Types
+	typename Base,
+	typename Binders
 >
-struct composite
-{
-	typedef Types type;
-};
+struct bind;
 
 }
 

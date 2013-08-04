@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_CLASS_HPP_INCLUDED
 #define MAJUTSU_CLASS_HPP_INCLUDED
 
+#include <majutsu/class_fwd.hpp>
 #include <majutsu/role_return_type.hpp>
 #include <majutsu/memory/init_count.hpp>
 #include <fcppt/config/external_begin.hpp>

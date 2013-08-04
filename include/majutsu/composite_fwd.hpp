@@ -18,10 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MAJUTSU_COMPOSITE_HPP_INCLUDED
-#define MAJUTSU_COMPOSITE_HPP_INCLUDED
-
-#include <majutsu/composite_fwd.hpp>
+#ifndef MAJUTSU_COMPOSITE_FWD_HPP_INCLUDED
+#define MAJUTSU_COMPOSITE_FWD_HPP_INCLUDED
 
 
 namespace majutsu
@@ -30,10 +28,7 @@ namespace majutsu
 template<
 	typename Types
 >
-struct composite
-{
-	typedef Types type;
-};
+struct composite;
 
 }
 

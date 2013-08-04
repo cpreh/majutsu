@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_BIND_HPP_INCLUDED
 #define MAJUTSU_BIND_HPP_INCLUDED
 
+#include <majutsu/bind_fwd.hpp>
 #include <majutsu/placeholder.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/if.hpp>

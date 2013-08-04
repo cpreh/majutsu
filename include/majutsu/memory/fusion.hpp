@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <majutsu//role_return_type.hpp>
 #include <majutsu/detail/find_role.hpp>
 #include <majutsu/detail/make_iterators.hpp>
+#include <majutsu/memory/fusion_fwd.hpp>
 #include <majutsu/memory/detail/expand_fusion_initlist.hpp>
 #include <majutsu/memory/detail/index_of.hpp>
 #include <majutsu/memory/detail/init_constants.hpp>

@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MAJUTSU_FUNDAMENTAL_HPP_INCLUDED
 
 #include <majutsu/const_raw_pointer.hpp>
+#include <majutsu/fundamental_fwd.hpp>
 #include <majutsu/integral_size.hpp>
 #include <majutsu/raw_pointer.hpp>
 #include <majutsu/size_type.hpp>

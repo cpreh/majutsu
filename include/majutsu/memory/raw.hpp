@@ -16,6 +16,7 @@
 #include <majutsu/detail/make_iterators.hpp>
 #include <majutsu/detail/wrapped_type.hpp>
 #include <majutsu/memory/needs_init.hpp>
+#include <majutsu/memory/raw_fwd.hpp>
 #include <majutsu/memory/detail/index_of.hpp>
 #include <majutsu/memory/detail/init_constants.hpp>
 #include <majutsu/memory/detail/init_raw_memory.hpp>
