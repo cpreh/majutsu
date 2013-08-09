@@ -23,7 +23,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <majutsu/class_fwd.hpp>
 #include <majutsu/role_return_type.hpp>
+#include <majutsu/detail/check_empty_class.hpp>
 #include <majutsu/memory/init_count.hpp>
+#include <fcppt/no_init_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/container/generation/make_vector.hpp>
 #include <boost/fusion/support/is_sequence.hpp>
@@ -31,6 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <boost/preprocessor/repetition/enum_params.hpp>
 #include <boost/preprocessor/repetition/repeat_from_to.hpp>
 #include <boost/utility/enable_if.hpp>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -56,6 +59,18 @@ struct class_
 	> memory_type;
 
 	class_()
+	:
+		memory_()
+	{
+		majutsu::detail::check_empty_class<
+			memory_type
+		>();
+	}
+
+	explicit
+	class_(
+		fcppt::no_init const &
+	)
 	:
 		memory_()
 	{
