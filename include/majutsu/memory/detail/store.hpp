@@ -21,11 +21,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_MEMORY_DETAIL_STORE_HPP_INCLUDED
 #define MAJUTSU_MEMORY_DETAIL_STORE_HPP_INCLUDED
 
+#include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <iterator>
 #include <memory>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace majutsu
 {
@@ -59,17 +61,28 @@ public:
 
 	typedef const_pointer const_iterator;
 
-	explicit store(
+	explicit
+	store(
 		allocator_type const &_alloc = allocator_type()
 	)
 	:
-		alloc_(_alloc),
-		data_(0),
-		data_end_(0),
-		cap_(0)
-	{}
+		alloc_(
+			_alloc
+		),
+		data_(
+			nullptr
+		),
+		data_end_(
+			nullptr
+		),
+		cap_(
+			nullptr
+		)
+	{
+	}
 
-	explicit store(
+	explicit
+	store(
 		size_type const _size,
 		allocator_type const &_alloc = allocator_type()
 	)
@@ -88,7 +101,8 @@ public:
 		cap_(
 			data_end_
 		)
-	{}
+	{
+	}
 
 	store(
 		store const &_other
@@ -152,9 +166,7 @@ public:
 	size() const
 	{
 		return
-			static_cast<
-				size_type
-			>(
+			fcppt::cast::to_unsigned(
 				std::distance(
 					begin(),
 					end()
@@ -166,9 +178,7 @@ public:
 	capacity() const
 	{
 		return
-			static_cast<
-				size_type
-			>(
+			fcppt::cast::to_unsigned(
 				cap_ - data_
 			);
 	}

@@ -28,6 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <majutsu/size_type.hpp>
 #include <majutsu/static_size.hpp>
 #include <majutsu/detail/copy_n.hpp>
+#include <fcppt/cast/to_char_ptr.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -69,7 +70,7 @@ place(
 )
 {
 	majutsu::detail::copy_n(
-		reinterpret_cast<
+		fcppt::cast::to_char_ptr<
 			majutsu::const_raw_pointer
 		>(
 			&_value
@@ -103,7 +104,7 @@ make(
 				Type
 			>
 		>::value,
-		reinterpret_cast<
+		fcppt::cast::to_char_ptr<
 			majutsu::raw_pointer
 		>(
 			&ret
