@@ -6,6 +6,7 @@
 #include <majutsu/needed_size.hpp>
 #include <majutsu/place.hpp>
 #include <majutsu/role_return_type.hpp>
+#include <majutsu/size_type.hpp>
 #include <majutsu/detail/find_role.hpp>
 #include <majutsu/detail/make_iterators.hpp>
 #include <majutsu/detail/wrapped_type.hpp>

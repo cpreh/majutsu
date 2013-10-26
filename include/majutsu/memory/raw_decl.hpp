@@ -6,6 +6,7 @@
 #include <majutsu/raw_data.hpp>
 #include <majutsu/raw_pointer.hpp>
 #include <majutsu/role_return_type.hpp>
+#include <majutsu/size_type.hpp>
 #include <majutsu/memory/raw_fwd.hpp>
 #include <majutsu/memory/detail/store_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
