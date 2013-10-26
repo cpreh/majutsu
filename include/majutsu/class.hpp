@@ -1,23 +1,3 @@
-/*
-spacegameengine is a portable easy to use game engine written in C++.
-Copyright (C) 2006-2013 Carl Philipp Reh (sefi@s-e-f-i.de)
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
-
-
 #ifndef MAJUTSU_CLASS_HPP_INCLUDED
 #define MAJUTSU_CLASS_HPP_INCLUDED
 
@@ -27,19 +7,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <majutsu/memory/init_count.hpp>
 #include <fcppt/no_init_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/fusion/container/generation/make_vector.hpp>
-#include <boost/fusion/support/is_sequence.hpp>
-#include <boost/preprocessor/repetition/enum_binary_params.hpp>
-#include <boost/preprocessor/repetition/enum_params.hpp>
-#include <boost/preprocessor/repetition/repeat_from_to.hpp>
-#include <boost/utility/enable_if.hpp>
-#include <type_traits>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-#ifndef MAJUTSU_MAX_CTOR_ARGS
-#define MAJUTSU_MAX_CTOR_ARGS 20
-#endif
 
 namespace majutsu
 {
@@ -76,6 +46,43 @@ struct class_
 	{
 	}
 
+	explicit
+	class_(
+		fcppt::no_init &&
+	)
+	:
+		memory_()
+	{
+	}
+
+	template<
+		typename... Args
+	>
+	explicit
+	class_(
+		Args && ..._args
+	)
+	:
+		memory_(
+			std::forward<
+				Args
+			>(
+				_args
+			)...
+		)
+	{
+		static_assert(
+			majutsu::memory::init_count<
+				memory_type
+			>::value
+			==
+			sizeof...(
+				Args
+			),
+		 	"You have to provide the right amount of parameters for a class_ constructor"
+		);
+	}
+
 	class_(
 		class_ const &_other
 	)
@@ -86,106 +93,56 @@ struct class_
 	{
 	}
 
-	template<
-		typename Argument
-	>
-	explicit
 	class_(
-		Argument const &_argument,
-		typename boost::disable_if<
-			boost::fusion::traits::is_sequence<
-				Argument
-			>,
-			void
-		>::type * = 0
+		class_ &_other
 	)
 	:
 		memory_(
-			boost::fusion::make_vector(
-				_argument
+			_other.memory_
+		)
+	{
+	}
+
+	class_(
+		class_ &&_other
+	)
+	:
+		memory_(
+			std::move(
+				_other.memory_
 			)
 		)
 	{
-		static_assert(
-			majutsu::memory::init_count<
-				memory_type
-			>::value
-			== 1u,
-			"This constructor can only be called for classes with one member"
-		);
 	}
 
-#define MAJUTSU_CLASS_MAKE_VARIADIC_CTOR(z, n, text)\
-template<\
-        BOOST_PP_ENUM_PARAMS_Z(\
-                z,\
-                n,\
-                typename T\
-        )>\
-explicit \
-class_(\
-        BOOST_PP_ENUM_BINARY_PARAMS_Z(\
-                z,\
-		n,\
-                const T,\
-                &t\
-        )\
-)\
-:\
-	memory_(\
-		boost::fusion::make_vector(\
-			BOOST_PP_ENUM_PARAMS_Z(\
-				z,\
-				n,\
-				t\
-			)\
-		)\
-	)\
-{\
-	static_assert(\
-		majutsu::memory::init_count<\
-			memory_type\
-		>::value == n,\
-		"You have to provide the right amount of parameters for a class_ constructor"\
-	);\
-}
-
-BOOST_PP_REPEAT_FROM_TO(
-	2,
-        MAJUTSU_MAX_CTOR_ARGS,
-        MAJUTSU_CLASS_MAKE_VARIADIC_CTOR,
-        void
-)
-
-#undef MAJUTSU_CLASS_MAKE_VARIADIC_CTOR
-
-	template<
-		typename Vector
-	>
-	explicit
-	class_(
-		Vector const &_initializers,
-		typename boost::enable_if<
-			boost::fusion::traits::is_sequence<
-				Vector
-			>,
-			void
-		>::type * = 0
+	class_ &
+	operator=(
+		class_ const &_other
 	)
-	:
-		memory_(
-			_initializers
-		)
 	{
-		static_assert(
-			majutsu::memory::init_count<
-				memory_type
-			>::value
-			== boost::mpl::size<
-				Vector
-			>::value,
-			"You have to provide the right amount of parameters for a class_ constructor"\
-		);
+		memory_ =
+			_other.memory_;
+
+		return
+			*this;
+	}
+
+	class_ &
+	operator=(
+		class_ &&_other
+	)
+	{
+		memory_ =
+			std::move(
+				_other.memory_
+			);
+
+		return
+			*this;
+	}
+
+	~class_()
+	{
 	}
 
 	template<
@@ -207,7 +164,8 @@ BOOST_PP_REPEAT_FROM_TO(
 	template<
 		typename Role
 	>
-	typename majutsu::role_return_type<
+	typename
+	majutsu::role_return_type<
 		typename memory_type::types,
 		Role
 	>::type

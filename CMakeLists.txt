@@ -12,6 +12,27 @@ include(
 
 fcppt_utils_prepare_config()
 
+option(
+	ENABLE_TEST
+	"Build the tests"
+	ON
+)
+
+if(
+	ENABLE_TEST
+)
+	list(
+		APPEND
+		NEEDED_BOOST_LIBS
+		"unit_test_framework"
+	)
+endif()
+
+find_package(
+	Boost 1.47.0 REQUIRED COMPONENTS
+	"${NEEDED_BOOST_LIBS}"
+)
+
 find_package(
 	fcppt
 	REQUIRED
@@ -33,11 +54,15 @@ set(
 	MAJUTSU_FILES
 	include/majutsu/access_role.hpp
 	include/majutsu/bind.hpp
+	include/majutsu/bind_fwd.hpp
 	include/majutsu/class.hpp
+	include/majutsu/class_fwd.hpp
 	include/majutsu/composite.hpp
+	include/majutsu/composite_fwd.hpp
 	include/majutsu/const_raw_pointer.hpp
 	include/majutsu/constant.hpp
 	include/majutsu/constant_fwd.hpp
+	include/majutsu/detail/check_empty_class.hpp
 	include/majutsu/detail/copy_n.hpp
 	include/majutsu/detail/find_role.hpp
 	include/majutsu/detail/make_iterators.hpp
@@ -48,6 +73,8 @@ set(
 	include/majutsu/extract_constant.hpp
 	include/majutsu/flatten.hpp
 	include/majutsu/fundamental.hpp
+	include/majutsu/fundamental_decl.hpp
+	include/majutsu/fundamental_fwd.hpp
 	include/majutsu/integral_size.hpp
 	include/majutsu/is_constant.hpp
 	include/majutsu/is_role.hpp
@@ -60,18 +87,22 @@ set(
 	include/majutsu/memory/detail/init_raw_memory.hpp
 	include/majutsu/memory/detail/store.hpp
 	include/majutsu/memory/fusion.hpp
+	include/majutsu/memory/fusion_fwd.hpp
 	include/majutsu/memory/init_count.hpp
 	include/majutsu/memory/needs_init.hpp
 	include/majutsu/memory/raw.hpp
+	include/majutsu/memory/raw_fwd.hpp
 	include/majutsu/needed_size.hpp
 	include/majutsu/place.hpp
 	include/majutsu/placeholder.hpp
+	include/majutsu/placeholder_fwd.hpp
 	include/majutsu/raw_data.hpp
 	include/majutsu/raw_pointer.hpp
 	include/majutsu/role.hpp
 	include/majutsu/role_fwd.hpp
 	include/majutsu/role_return_type.hpp
 	include/majutsu/simple.hpp
+	include/majutsu/simple_fwd.hpp
 	include/majutsu/size_type.hpp
 	include/majutsu/static_size.hpp
 )
@@ -84,6 +115,16 @@ fcppt_utils_add_dummy_target(
 	majutsu
 	"${MAJUTSU_FILES}"
 )
+
+if(
+	ENABLE_TEST
+)
+	enable_testing()
+
+	add_subdirectory(
+		test
+	)
+endif()
 
 set(
 	FCPPT_UTILS_NO_TARGETS

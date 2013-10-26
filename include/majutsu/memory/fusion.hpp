@@ -39,6 +39,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <boost/mpl/placeholders.hpp>
 #include <boost/mpl/transform.hpp>
 #include <boost/mpl/transform_view.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -88,21 +89,12 @@ public:
 		);
 	}
 
-	explicit fusion(
-		fusion const &_other
-	)
-	:
-		elements_(
-			_other.elements_
-		)
-	{
-	}
-
 	template<
-		typename Arguments
+		typename ...Args
 	>
-	explicit fusion(
-		Arguments const &_elements
+	explicit
+	fusion(
+		Args && ..._args
 	)
 	:
 		elements_(
@@ -110,11 +102,39 @@ public:
 				types,
 				tuple
 			>(
-				_elements
+				boost::fusion::make_vector(
+					std::forward<
+						Args
+					>(
+						_args
+					)...
+				)
 			)
 		)
 	{
 	}
+
+	fusion(
+		fusion const &
+	) = default;
+
+	fusion(
+		fusion &
+	) = default;
+
+	fusion(
+		fusion &&
+	) = default;
+
+	fusion &
+	operator=(
+		fusion const &
+	) = default;
+
+	fusion &
+	operator=(
+		fusion &&
+	) = default;
 
 	template<
 		typename Role

@@ -21,11 +21,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_MEMORY_DETAIL_INIT_RAW_MEMORY_HPP_INCLUDED
 #define MAJUTSU_MEMORY_DETAIL_INIT_RAW_MEMORY_HPP_INCLUDED
 
-#include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/fusion/sequence/intrinsic/at_c.hpp>
-#include <boost/mpl/at.hpp>
+#include <boost/mpl/front.hpp>
+#include <boost/mpl/pop_front.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace majutsu
 {
@@ -35,45 +36,58 @@ namespace detail
 {
 
 template<
+	typename TypesToInit,
 	typename Memory
 >
-class init_raw_memory
+inline
+void
+init_raw_memory(
+	Memory &
+)
 {
-	FCPPT_NONASSIGNABLE(
-		init_raw_memory
-	);
-public:
-	explicit init_raw_memory(
-		Memory &_memory
-	)
-	:
-		memory_(_memory)
-	{}
+}
 
-	template<
-		typename Pair
-	>
-	void
-	operator()(
-		Pair const &_pair
-	) const
-	{
-		memory_. template set_internal<
-			typename boost::mpl::at_c<
-				Pair,
-				1
-			>::type
+template<
+	typename TypesToInit,
+	typename Memory,
+	typename T,
+	typename... Args
+>
+inline
+void
+init_raw_memory(
+	Memory &_memory,
+	T &&_arg,
+	Args && ..._args
+)
+{
+	_memory. template set_internal<
+		typename
+		boost::mpl::front<
+			TypesToInit
+		>::type
+	>(
+		std::forward<
+			T
 		>(
-			boost::fusion::at_c<
-				0
-			>(
-				_pair
-			)
-		);
-	}
-private:
-	Memory &memory_;
-};
+			_arg
+		)
+	);
+
+	majutsu::memory::detail::init_raw_memory<
+		typename
+		boost::mpl::pop_front<
+			TypesToInit
+		>::type
+	>(
+		_memory,
+		std::forward<
+			Args
+		>(
+			_args
+		)...
+	);
+}
 
 }
 }

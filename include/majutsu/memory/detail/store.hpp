@@ -130,6 +130,30 @@ public:
 		);
 	}
 
+	store(
+		store &&_other
+	)
+	:
+		alloc_(
+			_other.alloc_
+		),
+		data_(
+			_other.data_
+		),
+		data_end_(
+			_other.data_end_
+		),
+		cap_(
+			_other.cap_
+		)
+	{
+		_other.data_ = nullptr;
+
+		_other.data_end_ = nullptr;
+
+		_other.cap_ = nullptr;
+	}
+
 	store &
 	operator=(
 		store const &_other
@@ -138,7 +162,8 @@ public:
 		if(
 			this == &_other
 		)
-			return *this;
+			return
+				*this;
 
 		this->deallocate();
 
@@ -154,7 +179,32 @@ public:
 			data()
 		);
 
-		return *this;
+		return
+			*this;
+	}
+
+	store &
+	operator=(
+		store &&_other
+	)
+	{
+		std::swap(
+			data_,
+			_other.data_
+		);
+
+		std::swap(
+			data_end_,
+			_other.data_end_
+		);
+
+		std::swap(
+			cap_,
+			_other.cap_
+		);
+
+		return
+			*this;
 	}
 
 	~store()
@@ -307,7 +357,9 @@ private:
 	void
 	deallocate()
 	{
-		if(data_)
+		if(
+			data_
+		)
 			alloc_.deallocate(
 				data_,
 				capacity()

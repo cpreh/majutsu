@@ -22,10 +22,6 @@
 #include <majutsu/memory/detail/init_raw_memory.hpp>
 #include <majutsu/memory/detail/store.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/fusion/adapted/mpl.hpp>
-#include <boost/fusion/algorithm/iteration/for_each.hpp>
-#include <boost/fusion/algorithm/transformation/zip.hpp>
-#include <boost/fusion/container/vector.hpp>
 #include <boost/mpl/deref.hpp>
 #include <boost/mpl/for_each.hpp>
 #include <boost/mpl/not.hpp>
@@ -35,6 +31,7 @@
 #include <algorithm>
 #include <array>
 #include <numeric>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -81,10 +78,10 @@ public:
 	}
 
 	template<
-		typename Arguments
+		typename... Args
 	>
 	raw(
-		Arguments const &_arguments
+		Args && ..._args
 	)
 	:
 		store_(),
@@ -105,19 +102,42 @@ public:
 			>
 		>::type types_to_init;
 
-		boost::fusion::for_each(
-			boost::fusion::zip(
-				_arguments,
-				types_to_init()
-			),
-			majutsu::memory::detail::init_raw_memory<
-				majutsu::memory::raw<
-					Type
-				>
+		majutsu::memory::detail::init_raw_memory<
+			types_to_init
+		>(
+			*this,
+			std::forward<
+				Args
 			>(
-				*this
-			)
+				_args
+			)...
 		);
+	}
+
+	raw(
+		raw const &
+	) = default;
+
+	raw(
+		raw &
+	) = default;
+
+	raw(
+		raw &&
+	) = default;
+
+	raw &
+	operator=(
+		raw const &
+	) = default;
+
+	raw &
+	operator=(
+		raw &&
+	) = default;
+
+	~raw()
+	{
 	}
 
 	template<
