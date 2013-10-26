@@ -56,7 +56,9 @@ set(
 	include/majutsu/bind.hpp
 	include/majutsu/bind_fwd.hpp
 	include/majutsu/class.hpp
+	include/majutsu/class_decl.hpp
 	include/majutsu/class_fwd.hpp
+	include/majutsu/class_impl.hpp
 	include/majutsu/composite.hpp
 	include/majutsu/composite_fwd.hpp
 	include/majutsu/const_raw_pointer.hpp
@@ -75,6 +77,7 @@ set(
 	include/majutsu/fundamental.hpp
 	include/majutsu/fundamental_decl.hpp
 	include/majutsu/fundamental_fwd.hpp
+	include/majutsu/get.hpp
 	include/majutsu/integral_size.hpp
 	include/majutsu/is_constant.hpp
 	include/majutsu/is_role.hpp
@@ -85,13 +88,19 @@ set(
 	include/majutsu/memory/detail/init_constants.hpp
 	include/majutsu/memory/detail/init_fusion_element.hpp
 	include/majutsu/memory/detail/init_raw_memory.hpp
-	include/majutsu/memory/detail/store.hpp
+	include/majutsu/memory/detail/store_decl.hpp
+	include/majutsu/memory/detail/store_fwd.hpp
+	include/majutsu/memory/detail/store_impl.hpp
 	include/majutsu/memory/fusion.hpp
+	include/majutsu/memory/fusion_decl.hpp
 	include/majutsu/memory/fusion_fwd.hpp
+	include/majutsu/memory/fusion_impl.hpp
 	include/majutsu/memory/init_count.hpp
 	include/majutsu/memory/needs_init.hpp
 	include/majutsu/memory/raw.hpp
+	include/majutsu/memory/raw_decl.hpp
 	include/majutsu/memory/raw_fwd.hpp
+	include/majutsu/memory/raw_impl.hpp
 	include/majutsu/needed_size.hpp
 	include/majutsu/place.hpp
 	include/majutsu/placeholder.hpp
@@ -101,6 +110,7 @@ set(
 	include/majutsu/role.hpp
 	include/majutsu/role_fwd.hpp
 	include/majutsu/role_return_type.hpp
+	include/majutsu/set.hpp
 	include/majutsu/simple.hpp
 	include/majutsu/simple_fwd.hpp
 	include/majutsu/size_type.hpp
