@@ -1,5 +1,6 @@
 cmake_minimum_required(
-	VERSION 2.6
+	VERSION
+	2.8.12
 )
 
 project(
@@ -29,7 +30,10 @@ if(
 endif()
 
 find_package(
-	Boost 1.47.0 REQUIRED COMPONENTS
+	Boost
+	1.47.0
+	REQUIRED
+	COMPONENTS
 	"${NEEDED_BOOST_LIBS}"
 )
 
@@ -40,10 +44,6 @@ find_package(
 
 include_directories(
 	${fcppt_INCLUDE_DIRS}
-)
-
-add_definitions(
-	${fcppt_DEFINITIONS}
 )
 
 include_directories(
