@@ -126,6 +126,10 @@ fcppt_utils_add_dummy_target(
 	"${MAJUTSU_FILES}"
 )
 
+fcppt_utils_set_target_compiler_flags(
+	majutsu_dummy
+)
+
 if(
 	ENABLE_TEST
 )
