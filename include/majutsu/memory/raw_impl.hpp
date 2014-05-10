@@ -10,7 +10,6 @@
 #include <majutsu/detail/find_role.hpp>
 #include <majutsu/detail/make_iterators.hpp>
 #include <majutsu/detail/wrapped_type.hpp>
-#include <majutsu/memory/needs_init.hpp>
 #include <majutsu/memory/raw_decl.hpp>
 #include <majutsu/memory/detail/index_of.hpp>
 #include <majutsu/memory/detail/init_constants.hpp>
@@ -19,9 +18,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/deref.hpp>
 #include <boost/mpl/for_each.hpp>
-#include <boost/mpl/not.hpp>
 #include <boost/mpl/placeholders.hpp>
-#include <boost/mpl/remove_if.hpp>
 #include <algorithm>
 #include <numeric>
 #include <utility>
@@ -58,22 +55,7 @@ majutsu::memory::raw<
 {
 	this->init();
 
-	typedef typename boost::mpl::remove_if<
-		typename majutsu::detail::make_iterators<
-			flattened_types
-		>::type,
-		boost::mpl::not_<
-			majutsu::memory::needs_init<
-				boost::mpl::deref<
-					boost::mpl::_1
-				>
-			>
-		>
-	>::type types_to_init;
-
-	majutsu::memory::detail::init_raw_memory<
-		types_to_init
-	>(
+	majutsu::memory::detail::init_raw_memory(
 		*this,
 		std::forward<
 			Args

@@ -18,37 +18,41 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MAJUTSU_DETAIL_UNWRAP_ROLE_HPP_INCLUDED
-#define MAJUTSU_DETAIL_UNWRAP_ROLE_HPP_INCLUDED
+#ifndef MAJUTSU_MEMORY_INIT_TYPES_HPP_INCLUDED
+#define MAJUTSU_MEMORY_INIT_TYPES_HPP_INCLUDED
 
-#include <majutsu/role_fwd.hpp>
+#include <majutsu/memory/needs_init.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/mpl/filter_view.hpp>
+#include <boost/mpl/placeholders.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
 {
-namespace detail
+namespace memory
 {
 
-template<
-	typename Type
->
-struct unwrap_role;
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
 template<
-	typename Type,
-	typename Tag
+	typename Memory
 >
-struct unwrap_role<
-	majutsu::role<
-		Type,
-		Tag
+struct init_types
+:
+boost::mpl::filter_view<
+	typename Memory::types,
+	majutsu::memory::needs_init<
+		boost::mpl::_1
 	>
 >
-{
-	typedef Tag type;
-};
+{};
+
+FCPPT_PP_POP_WARNING
 
 }
 }

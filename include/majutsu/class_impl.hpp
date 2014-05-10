@@ -3,10 +3,12 @@
 
 #include <majutsu/class_decl.hpp>
 #include <majutsu/role_return_type.hpp>
+#include <majutsu/detail/all_initializers.hpp>
 #include <majutsu/detail/check_empty_class.hpp>
 #include <majutsu/memory/init_count.hpp>
 #include <fcppt/no_init_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/mpl/vector.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -96,6 +98,19 @@ majutsu::class_<
 			Args
 		),
 	 	"You have to provide the right amount of parameters for a class_ constructor"
+	);
+
+	static_assert(
+		majutsu::detail::all_initializers<
+			typename
+			majutsu::memory::init_types<
+				memory_type
+			>::type,
+			boost::mpl::vector<
+				Args...
+			>
+		>::value,
+		"You have to initialize every element"
 	);
 }
 

@@ -2,6 +2,8 @@
 #include <majutsu/composite.hpp>
 #include <majutsu/fundamental.hpp>
 #include <majutsu/get.hpp>
+#include <majutsu/make_role_tag.hpp>
+#include <majutsu/make_role_tag_arg.hpp>
 #include <majutsu/role.hpp>
 #include <majutsu/set.hpp>
 #include <majutsu/memory/fusion.hpp>
@@ -18,6 +20,15 @@
 
 namespace
 {
+
+MAJUTSU_MAKE_ROLE_TAG(
+	int_role
+);
+
+MAJUTSU_MAKE_ROLE_TAG_ARG(
+	bool_role,
+	int
+);
 
 template<
 	template<
@@ -45,10 +56,14 @@ test()
 		majutsu::composite<
 			boost::mpl::vector2<
 				majutsu::role<
-					int_
+					int_,
+					int_role
 				>,
 				majutsu::role<
-					bool_
+					bool_,
+					bool_role<
+						1
+					>
 				>
 			>
 		>,
@@ -57,13 +72,13 @@ test()
 	my_class;
 
 	my_class test(
-		4,
-		true
+		int_role{} = 4,
+		bool_role<1>{} = true
 	);
 
 	BOOST_CHECK(
 		majutsu::get<
-			int_
+			int_role
 		>(
 			test
 		)
@@ -73,7 +88,9 @@ test()
 
 	BOOST_CHECK(
 		majutsu::get<
-			bool_
+			bool_role<
+				1
+			>
 		>(
 			test
 		)
@@ -87,7 +104,7 @@ test()
 
 	BOOST_CHECK(
 		majutsu::get<
-			int_
+			int_role
 		>(
 			test2
 		)
@@ -97,14 +114,18 @@ test()
 
 	BOOST_CHECK(
 		majutsu::get<
-			bool_
+			bool_role<
+				1
+			>
 		>(
 			test2
 		)
 	);
 
 	majutsu::set<
-		bool_
+		bool_role<
+			1
+		>
 	>(
 		test2,
 		false
@@ -112,7 +133,9 @@ test()
 
 	BOOST_CHECK(
 		!majutsu::get<
-			bool_
+			bool_role<
+				1
+			>
 		>(
 			test2
 		)

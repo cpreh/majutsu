@@ -60,13 +60,11 @@ majutsu::memory::fusion<
 			types,
 			tuple
 		>(
-			boost::fusion::make_vector(
-				std::forward<
-					Args
-				>(
-					_args
-				)...
-			)
+			std::forward<
+				Args
+			>(
+				_args
+			)...
 		)
 	)
 {
@@ -184,7 +182,7 @@ majutsu::memory::fusion<
 
 	return
 		boost::fusion::at<
-			detail::index_of<
+			majutsu::memory::detail::index_of<
 				types,
 				found_role
 			>
@@ -208,7 +206,7 @@ majutsu::memory::fusion<
 )
 {
 	boost::fusion::at<
-		detail::index_of<
+		majutsu::memory::detail::index_of<
 			types,
 			Iterator
 		>

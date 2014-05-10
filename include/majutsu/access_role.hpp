@@ -33,17 +33,17 @@ template<
 struct access_role;
 
 template<
-	typename T,
-	typename Alias
+	typename Type,
+	typename Tag
 >
 struct access_role<
 	majutsu::role<
-		T,
-		Alias
+		Type,
+		Tag
 	>
 >
 {
-	typedef T type;
+	typedef Type type;
 };
 
 }

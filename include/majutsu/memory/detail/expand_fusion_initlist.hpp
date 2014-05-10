@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/adapted/mpl.hpp>
 #include <boost/fusion/algorithm/transformation/transform.hpp>
+#include <boost/fusion/container/generation/make_vector.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -38,21 +39,33 @@ namespace detail
 template<
 	typename Types,
 	typename Tuple,
-	typename Arguments
+	typename ...Arguments
 >
-Tuple const
+Tuple
 expand_fusion_initlist(
-	Arguments const &_arguments
+	Arguments && ..._arguments
 )
 {
+	auto fusion_arguments(
+		boost::fusion::make_vector(
+			std::forward<
+				Arguments
+			>(
+				_arguments
+			)...
+		)
+	);
+
 	return
 		boost::fusion::transform(
 			Types(),
 			majutsu::memory::detail::init_fusion_element<
 				Types,
-				Arguments
+				decltype(
+					fusion_arguments
+				)
 			>(
-				_arguments
+				fusion_arguments
 			)
 		);
 }

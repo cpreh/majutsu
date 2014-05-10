@@ -64,11 +64,14 @@ set(
 	include/majutsu/const_raw_pointer.hpp
 	include/majutsu/constant.hpp
 	include/majutsu/constant_fwd.hpp
+	include/majutsu/detail/all_initializers.hpp
 	include/majutsu/detail/check_empty_class.hpp
+	include/majutsu/detail/contains_initializer.hpp
 	include/majutsu/detail/copy_n.hpp
 	include/majutsu/detail/find_role.hpp
 	include/majutsu/detail/make_iterators.hpp
 	include/majutsu/detail/static_size_base.hpp
+	include/majutsu/detail/tag_is_same.hpp
 	include/majutsu/detail/unwrap_role.hpp
 	include/majutsu/detail/wrapped_type.hpp
 	include/majutsu/dispatch_value.hpp
@@ -81,8 +84,13 @@ set(
 	include/majutsu/integral_size.hpp
 	include/majutsu/is_constant.hpp
 	include/majutsu/is_role.hpp
+	include/majutsu/is_role_tag.hpp
 	include/majutsu/is_static_size.hpp
 	include/majutsu/make.hpp
+	include/majutsu/make_role_tag.hpp
+	include/majutsu/make_role_tag_arg.hpp
+	include/majutsu/make_role_tag_arg_fwd.hpp
+	include/majutsu/make_role_tag_fwd.hpp
 	include/majutsu/memory/detail/expand_fusion_initlist.hpp
 	include/majutsu/memory/detail/index_of.hpp
 	include/majutsu/memory/detail/init_constants.hpp
@@ -96,6 +104,7 @@ set(
 	include/majutsu/memory/fusion_fwd.hpp
 	include/majutsu/memory/fusion_impl.hpp
 	include/majutsu/memory/init_count.hpp
+	include/majutsu/memory/init_types.hpp
 	include/majutsu/memory/needs_init.hpp
 	include/majutsu/memory/raw.hpp
 	include/majutsu/memory/raw_decl.hpp
@@ -109,7 +118,14 @@ set(
 	include/majutsu/raw_pointer.hpp
 	include/majutsu/role.hpp
 	include/majutsu/role_fwd.hpp
+	include/majutsu/role_init_decl.hpp
+	include/majutsu/role_init_fwd.hpp
+	include/majutsu/role_init_impl.hpp
 	include/majutsu/role_return_type.hpp
+	include/majutsu/role_tag.hpp
+	include/majutsu/role_tag_decl.hpp
+	include/majutsu/role_tag_fwd.hpp
+	include/majutsu/role_tag_impl.hpp
 	include/majutsu/set.hpp
 	include/majutsu/simple.hpp
 	include/majutsu/simple_fwd.hpp

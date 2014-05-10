@@ -1,4 +1,6 @@
 #include <majutsu/composite.hpp>
+#include <majutsu/integral_size.hpp>
+#include <majutsu/make_role_tag.hpp>
 #include <majutsu/role.hpp>
 #include <majutsu/simple.hpp>
 #include <majutsu/memory/fusion.hpp>
@@ -18,6 +20,58 @@ BOOST_AUTO_TEST_CASE(
 	fusion
 )
 {
+	class nodefault
+	{
+	public:
+		explicit
+		nodefault(
+			int const _value
+		)
+		:
+			value_(
+				_value
+			)
+		{
+		}
+
+		int
+		value() const
+		{
+			return
+				value_;
+		}
+	private:
+		int value_;
+	};
+
+	class copy_only
+	{
+	public:
+		explicit
+		copy_only(
+			int const _value
+		)
+		:
+			value_(
+				_value
+			)
+		{
+		}
+
+		copy_only(
+			copy_only const &
+		) = default;
+
+		int
+		value() const
+		{
+			return
+				value_;
+		}
+	private:
+		int value_;
+	};
+
 	typedef
 	majutsu::simple<
 		int
@@ -31,14 +85,52 @@ BOOST_AUTO_TEST_CASE(
 	bool_;
 
 	typedef
+	majutsu::simple<
+		nodefault
+	>
+	nodefault_;
+
+	typedef
+	majutsu::simple<
+		copy_only
+	>
+	copy_only_;
+
+	MAJUTSU_MAKE_ROLE_TAG(
+		int_role
+	);
+
+	MAJUTSU_MAKE_ROLE_TAG(
+		bool_role
+	);
+
+	MAJUTSU_MAKE_ROLE_TAG(
+		nodefault_role
+	);
+
+	MAJUTSU_MAKE_ROLE_TAG(
+		copy_only_role
+	);
+
+	typedef
 	majutsu::memory::fusion<
 		majutsu::composite<
-			boost::mpl::vector2<
+			boost::mpl::vector4<
 				majutsu::role<
-					int_
+					int_,
+					int_role
 				>,
 				majutsu::role<
-					bool_
+					bool_,
+					bool_role
+				>,
+				majutsu::role<
+					nodefault_,
+					nodefault_role
+				>,
+				majutsu::role<
+					copy_only_,
+					copy_only_role
 				>
 			>
 		>
@@ -46,13 +138,15 @@ BOOST_AUTO_TEST_CASE(
 	my_memory;
 
 	my_memory test(
-		4,
-		true
+		int_role{} = 4,
+		bool_role{} = true,
+		nodefault_role{} = nodefault{42},
+		copy_only_role{} = copy_only(42)
 	);
 
 	BOOST_CHECK(
 		test.get<
-			int_
+			int_role
 		>()
 		==
 		4
@@ -60,8 +154,24 @@ BOOST_AUTO_TEST_CASE(
 
 	BOOST_CHECK(
 		test.get<
-			bool_
+			bool_role
 		>()
+	);
+
+	BOOST_CHECK(
+		test.get<
+			nodefault_role
+		>().value()
+		==
+		42
+	);
+
+	BOOST_CHECK(
+		test.get<
+			copy_only_role
+		>().value()
+		==
+		42
 	);
 
 	my_memory test2(
@@ -70,7 +180,7 @@ BOOST_AUTO_TEST_CASE(
 
 	BOOST_CHECK(
 		test2.get<
-			int_
+			int_role
 		>()
 		==
 		4
@@ -78,7 +188,7 @@ BOOST_AUTO_TEST_CASE(
 
 	BOOST_CHECK(
 		test2.get<
-			bool_
+			bool_role
 		>()
 	);
 }

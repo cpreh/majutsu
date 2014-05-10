@@ -21,9 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_MEMORY_DETAIL_INIT_RAW_MEMORY_HPP_INCLUDED
 #define MAJUTSU_MEMORY_DETAIL_INIT_RAW_MEMORY_HPP_INCLUDED
 
+#include <majutsu/role_tag_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/front.hpp>
-#include <boost/mpl/pop_front.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -36,7 +35,6 @@ namespace detail
 {
 
 template<
-	typename TypesToInit,
 	typename Memory
 >
 inline
@@ -48,7 +46,6 @@ init_raw_memory(
 }
 
 template<
-	typename TypesToInit,
 	typename Memory,
 	typename T,
 	typename... Args
@@ -61,25 +58,16 @@ init_raw_memory(
 	Args && ..._args
 )
 {
-	_memory. template set_internal<
-		typename
-		boost::mpl::front<
-			TypesToInit
-		>::type
+	_memory. template set<
+		majutsu::role_tag<
+			typename
+			T::tag
+		>
 	>(
-		std::forward<
-			T
-		>(
-			_arg
-		)
+		_arg.value()
 	);
 
-	majutsu::memory::detail::init_raw_memory<
-		typename
-		boost::mpl::pop_front<
-			TypesToInit
-		>::type
-	>(
+	majutsu::memory::detail::init_raw_memory(
 		_memory,
 		std::forward<
 			Args

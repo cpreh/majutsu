@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_ROLE_HPP_INCLUDED
 #define MAJUTSU_ROLE_HPP_INCLUDED
 
+#include <majutsu/is_role_tag.hpp>
 #include <majutsu/role_fwd.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -34,16 +35,27 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
 template<
-	typename T,
-	typename Alias
+	typename Type,
+	typename Tag
 >
 struct role
 :
-T
+Type
 {
-	typedef T wrapped;
+	typedef
+	Type
+	wrapped;
 
-	typedef Alias alias;
+	typedef
+	Tag
+	tag;
+
+	static_assert(
+		majutsu::is_role_tag<
+			tag
+		>::value,
+		"Tag of role<> must be a role_tag"
+	);
 };
 
 FCPPT_PP_POP_WARNING

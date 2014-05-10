@@ -23,12 +23,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <majutsu/is_constant.hpp>
 #include <majutsu/is_role.hpp>
-#include <majutsu/memory/detail/index_of.hpp>
+#include <majutsu/detail/tag_is_same.hpp>
+#include <majutsu/detail/unwrap_role.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/fusion/sequence/intrinsic/at.hpp>
-#include <boost/mpl/filter_view.hpp>
-#include <boost/mpl/find.hpp>
+#include <boost/fusion/algorithm/query/find_if.hpp>
+#include <boost/fusion/iterator/deref.hpp>
 #include <boost/mpl/or.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <boost/utility/enable_if.hpp>
@@ -74,13 +74,16 @@ public:
 		>::type::type type;
 	};
 
-
-	explicit init_fusion_element(
-		Arguments const &_arguments
+	explicit
+	init_fusion_element(
+		Arguments &_arguments
 	)
 	:
-		arguments_(_arguments)
-	{}
+		arguments_(
+			_arguments
+		)
+	{
+	}
 
 	template<
 		typename Type
@@ -95,41 +98,37 @@ public:
 		Type const &
 	) const
 	{
-		return Type::value;
+		return
+			Type::value;
 	}
 
 	template<
-		typename Type
+		typename Role
 	>
 	typename boost::enable_if<
 		majutsu::is_role<
-			Type
+			Role
 		>,
-		typename Type::type
+		typename Role::type
 	>::type
 	operator()(
-		Type const &
+		Role const &
 	) const
 	{
-		typedef boost::mpl::filter_view<
-			Elements,
-			majutsu::is_role<
-				boost::mpl::_1
-			>
-		> roles;
-
 		return
-			boost::fusion::at<
-				typename majutsu::memory::detail::index_of<
-					roles,
-					typename boost::mpl::find<
-						roles,
-						Type
-					>::type
-				>::type
-			>(
-				arguments_
-			);
+			boost::fusion::deref(
+				boost::fusion::find_if<
+					majutsu::detail::tag_is_same<
+						typename
+						majutsu::detail::unwrap_role<
+							Role
+						>::type,
+						boost::mpl::_1
+					>
+				>(
+					arguments_
+				)
+			).value();
 	}
 
 	template<
@@ -150,10 +149,12 @@ public:
 		Type const &
 	) const
 	{
-		return typename Type::type();
+		// TODO: Error?
+		return
+			typename Type::type();
 	}
 private:
-	Arguments const &arguments_;
+	Arguments &arguments_;
 };
 
 }

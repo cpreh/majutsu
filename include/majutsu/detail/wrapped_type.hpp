@@ -34,31 +34,31 @@ namespace detail
 {
 
 template<
-	typename T
+	typename Type
 >
 struct wrapped_type
 {
-	typedef T type;
+	typedef Type type;
 };
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
 template<
-	typename Wrapped,
-	typename Alias
+	typename Type,
+	typename Tag
 >
 struct wrapped_type<
 	majutsu::role<
-		Wrapped,
-		Alias
+		Type,
+		Tag
 	>
 >
 :
 majutsu::access_role<
 	majutsu::role<
-		Wrapped,
-		Alias
+		Type,
+		Tag
 	>
 >
 {

@@ -1,5 +1,6 @@
 #include <majutsu/composite.hpp>
 #include <majutsu/fundamental.hpp>
+#include <majutsu/make_role_tag.hpp>
 #include <majutsu/role.hpp>
 #include <majutsu/memory/raw.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
@@ -30,15 +31,25 @@ BOOST_AUTO_TEST_CASE(
 	>
 	bool_;
 
+	MAJUTSU_MAKE_ROLE_TAG(
+		int_role
+	);
+
+	MAJUTSU_MAKE_ROLE_TAG(
+		bool_role
+	);
+
 	typedef
 	majutsu::memory::raw<
 		majutsu::composite<
 			boost::mpl::vector2<
 				majutsu::role<
-					int_
+					int_,
+					int_role
 				>,
 				majutsu::role<
-					bool_
+					bool_,
+					bool_role
 				>
 			>
 		>
@@ -46,13 +57,13 @@ BOOST_AUTO_TEST_CASE(
 	my_memory;
 
 	my_memory test(
-		4,
-		true
+		int_role{} = 4,
+		bool_role{} = true
 	);
 
 	BOOST_CHECK(
 		test.get<
-			int_
+			int_role
 		>()
 		==
 		4
@@ -60,7 +71,7 @@ BOOST_AUTO_TEST_CASE(
 
 	BOOST_CHECK(
 		test.get<
-			bool_
+			bool_role
 		>()
 	);
 }

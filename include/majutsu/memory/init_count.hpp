@@ -21,13 +21,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_MEMORY_INIT_COUNT_HPP_INCLUDED
 #define MAJUTSU_MEMORY_INIT_COUNT_HPP_INCLUDED
 
-#include <majutsu/memory/needs_init.hpp>
+#include <majutsu/memory/init_types.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/filter_view.hpp>
-#include <boost/mpl/placeholders.hpp>
 #include <boost/mpl/size.hpp>
 #include <fcppt/config/external_end.hpp>
 
@@ -46,11 +44,8 @@ template<
 struct init_count
 :
 boost::mpl::size<
-	boost::mpl::filter_view<
-		typename Memory::types,
-		needs_init<
-			boost::mpl::_1
-		>
+	majutsu::memory::init_types<
+		Memory
 	>
 >
 {};

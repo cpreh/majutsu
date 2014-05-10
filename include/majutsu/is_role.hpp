@@ -47,12 +47,12 @@ std::false_type
 
 template<
 	typename Type,
-	typename Alias
+	typename Tag
 >
 struct is_role<
 	majutsu::role<
 		Type,
-		Alias
+		Tag
 	>
 >
 :

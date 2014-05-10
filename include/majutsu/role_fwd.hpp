@@ -26,8 +26,8 @@ namespace majutsu
 {
 
 template<
-	typename T,
-	typename Alias = T
+	typename Type,
+	typename Tag
 >
 struct role;
 
