@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_DETAIL_FIND_ROLE_HPP_INCLUDED
 #define MAJUTSU_DETAIL_FIND_ROLE_HPP_INCLUDED
 
-#include <majutsu/detail/unwrap_role.hpp>
+#include <majutsu/unwrap_role.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -49,7 +49,7 @@ struct find_role
 boost::mpl::find_if<
 	Elements,
 	std::is_same<
-		majutsu::detail::unwrap_role<
+		majutsu::unwrap_role<
 			boost::mpl::_1
 		>,
 		Role

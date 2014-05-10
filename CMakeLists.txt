@@ -72,7 +72,6 @@ set(
 	include/majutsu/detail/make_iterators.hpp
 	include/majutsu/detail/static_size_base.hpp
 	include/majutsu/detail/tag_is_same.hpp
-	include/majutsu/detail/unwrap_role.hpp
 	include/majutsu/detail/wrapped_type.hpp
 	include/majutsu/dispatch_value.hpp
 	include/majutsu/extract_constant.hpp
@@ -131,6 +130,7 @@ set(
 	include/majutsu/simple_fwd.hpp
 	include/majutsu/size_type.hpp
 	include/majutsu/static_size.hpp
+	include/majutsu/unwrap_role.hpp
 )
 
 fcppt_utils_add_source_groups(

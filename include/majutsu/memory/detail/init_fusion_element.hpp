@@ -23,8 +23,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <majutsu/is_constant.hpp>
 #include <majutsu/is_role.hpp>
+#include <majutsu/unwrap_role.hpp>
 #include <majutsu/detail/tag_is_same.hpp>
-#include <majutsu/detail/unwrap_role.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/algorithm/query/find_if.hpp>
@@ -120,7 +120,7 @@ public:
 				boost::fusion::find_if<
 					majutsu::detail::tag_is_same<
 						typename
-						majutsu::detail::unwrap_role<
+						majutsu::unwrap_role<
 							Role
 						>::type,
 						boost::mpl::_1
