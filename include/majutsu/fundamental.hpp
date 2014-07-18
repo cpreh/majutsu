@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MAJUTSU_FUNDAMENTAL_HPP_INCLUDED
 
 #include <majutsu/const_raw_pointer.hpp>
+#include <majutsu/dispatch_type.hpp>
 #include <majutsu/fundamental_decl.hpp>
 #include <majutsu/integral_size.hpp>
 #include <majutsu/raw_pointer.hpp>
@@ -62,9 +63,11 @@ template<
 >
 void
 place(
-	majutsu::fundamental<
-		Type
-	> const *,
+	majutsu::dispatch_type<
+		majutsu::fundamental<
+			Type
+		>
+	>,
 	Type const &_value,
 	majutsu::raw_pointer const _memory
 )
@@ -89,9 +92,11 @@ template<
 >
 Type
 make(
-	majutsu::fundamental<
-		Type
-	> const *,
+	majutsu::dispatch_type<
+		majutsu::fundamental<
+			Type
+		>
+	>,
 	majutsu::const_raw_pointer const _memory
 )
 {
@@ -111,7 +116,8 @@ make(
 		)
 	);
 
-	return ret;
+	return
+		ret;
 }
 
 }

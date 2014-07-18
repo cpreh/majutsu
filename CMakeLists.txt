@@ -73,6 +73,7 @@ set(
 	include/majutsu/detail/static_size_base.hpp
 	include/majutsu/detail/tag_is_same.hpp
 	include/majutsu/detail/wrapped_type.hpp
+	include/majutsu/dispatch_type.hpp
 	include/majutsu/dispatch_value.hpp
 	include/majutsu/extract_constant.hpp
 	include/majutsu/flatten.hpp

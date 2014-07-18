@@ -21,6 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MAJUTSU_DISPATCH_VALUE_HPP_INCLUDED
 #define MAJUTSU_DISPATCH_VALUE_HPP_INCLUDED
 
+#include <majutsu/dispatch_type.hpp>
+
 
 namespace majutsu
 {
@@ -28,7 +30,9 @@ namespace majutsu
 template<
 	typename T
 >
-T const *
+majutsu::dispatch_type<
+	T
+>
 dispatch_value()
 {
 	return
