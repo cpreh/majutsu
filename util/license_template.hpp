@@ -4,19 +4,3 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_BIND_FWD_HPP_INCLUDED
-#define MAJUTSU_BIND_FWD_HPP_INCLUDED
-
-
-namespace majutsu
-{
-
-template<
-	typename Base,
-	typename Binders
->
-struct bind;
-
-}
-
-#endif

@@ -1,0 +1,5 @@
+{
+	"standard_match" : "./include/.*",
+	"main_license" : "util/license_template.hpp",
+	"nolicense" : []
+}
