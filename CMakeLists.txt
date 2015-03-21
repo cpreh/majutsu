@@ -11,8 +11,6 @@ include(
 	FcpptCMakeUtils
 )
 
-fcppt_utils_prepare_config()
-
 option(
 	ENABLE_TEST
 	"Build the tests"
