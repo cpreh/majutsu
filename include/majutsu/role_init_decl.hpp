@@ -24,6 +24,10 @@ public:
 	Tag
 	tag;
 
+	typedef
+	Value
+	value_type;
+
 	explicit
 	role_init(
 		Value

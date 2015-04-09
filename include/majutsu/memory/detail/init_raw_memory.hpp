@@ -7,9 +7,11 @@
 #ifndef MAJUTSU_MEMORY_DETAIL_INIT_RAW_MEMORY_HPP_INCLUDED
 #define MAJUTSU_MEMORY_DETAIL_INIT_RAW_MEMORY_HPP_INCLUDED
 
+#include <majutsu/role_return_type.hpp>
 #include <majutsu/role_tag_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -44,6 +46,33 @@ init_raw_memory(
 	Args && ..._args
 )
 {
+	typedef
+	majutsu::role_tag<
+		typename
+		T::tag
+	>
+	role_tag_type;
+
+	static_assert(
+		std::is_same<
+			typename
+			std::remove_const<
+				typename
+				std::remove_reference<
+					typename
+					T::value_type
+				>::type
+			>::type,
+			typename
+			majutsu::role_return_type<
+				typename
+				Memory::types,
+				role_tag_type
+			>::type
+		>::value,
+		"Invalid init type"
+	);
+
 	_memory. template set<
 		majutsu::role_tag<
 			typename
