@@ -4,39 +4,36 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_DETAIL_FIND_ROLE_HPP_INCLUDED
-#define MAJUTSU_DETAIL_FIND_ROLE_HPP_INCLUDED
+#ifndef MAJUTSU_RAW_DETAIL_INIT_TYPES_HPP_INCLUDED
+#define MAJUTSU_RAW_DETAIL_INIT_TYPES_HPP_INCLUDED
 
-#include <majutsu/unwrap_role_tpl.hpp>
+#include <majutsu/raw/detail/needs_init.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/find_if.hpp>
+#include <boost/mpl/filter_view.hpp>
 #include <boost/mpl/placeholders.hpp>
-#include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
 {
+namespace raw
+{
 namespace detail
 {
 
 template<
-	typename Elements,
-	typename Role
+	typename Types
 >
-using find_role
+using init_types
 =
-typename
-boost::mpl::find_if<
-	Elements,
-	std::is_same<
-		majutsu::unwrap_role_tpl<
-			boost::mpl::_1
-		>,
-		Role
+boost::mpl::filter_view<
+	Types,
+	majutsu::raw::detail::needs_init<
+		boost::mpl::_1
 	>
->::type;
+>;
 
+}
 }
 }
 

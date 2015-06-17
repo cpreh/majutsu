@@ -4,26 +4,20 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_UNWRAP_ROLE_HPP_INCLUDED
-#define MAJUTSU_UNWRAP_ROLE_HPP_INCLUDED
+#ifndef MAJUTSU_RAW_CONST_POINTER_HPP_INCLUDED
+#define MAJUTSU_RAW_CONST_POINTER_HPP_INCLUDED
 
-#include <majutsu/unwrap_role_tpl.hpp>
+#include <majutsu/raw/data.hpp>
 
 
 namespace majutsu
 {
+namespace raw
+{
 
-template<
-	typename Type
->
-using
-unwrap_role
-=
-typename
-majutsu::unwrap_role_tpl<
-	Type
->::type;
+typedef majutsu::raw::data const *const_pointer;
 
+}
 }
 
 #endif

@@ -51,69 +51,67 @@ include_directories(
 set(
 	MAJUTSU_FILES
 	include/majutsu/access_role.hpp
+	include/majutsu/access_role_tpl.hpp
 	include/majutsu/bind.hpp
 	include/majutsu/bind_fwd.hpp
-	include/majutsu/class.hpp
-	include/majutsu/class_decl.hpp
-	include/majutsu/class_fwd.hpp
-	include/majutsu/class_impl.hpp
-	include/majutsu/composite.hpp
-	include/majutsu/composite_fwd.hpp
-	include/majutsu/const_raw_pointer.hpp
-	include/majutsu/constant.hpp
-	include/majutsu/constant_fwd.hpp
 	include/majutsu/detail/all_initializers.hpp
-	include/majutsu/detail/check_empty_class.hpp
 	include/majutsu/detail/contains_initializer.hpp
-	include/majutsu/detail/copy_n.hpp
 	include/majutsu/detail/find_role.hpp
+	include/majutsu/detail/find_role_deref.hpp
+	include/majutsu/detail/flatten.hpp
+	include/majutsu/detail/index_of.hpp
 	include/majutsu/detail/make_iterators.hpp
-	include/majutsu/detail/static_size_base.hpp
 	include/majutsu/detail/tag_is_same.hpp
 	include/majutsu/detail/wrapped_type.hpp
 	include/majutsu/dispatch_type.hpp
 	include/majutsu/dispatch_value.hpp
-	include/majutsu/extract_constant.hpp
 	include/majutsu/flatten.hpp
-	include/majutsu/fundamental.hpp
-	include/majutsu/fundamental_decl.hpp
-	include/majutsu/fundamental_fwd.hpp
+	include/majutsu/fusion/detail/expand_initlist.hpp
+	include/majutsu/fusion/detail/init_element.hpp
+	include/majutsu/fusion/record.hpp
+	include/majutsu/fusion/record_decl.hpp
+	include/majutsu/fusion/record_fwd.hpp
+	include/majutsu/fusion/record_impl.hpp
 	include/majutsu/get.hpp
-	include/majutsu/integral_size.hpp
-	include/majutsu/is_constant.hpp
 	include/majutsu/is_role.hpp
 	include/majutsu/is_role_tag.hpp
-	include/majutsu/is_static_size.hpp
-	include/majutsu/make.hpp
 	include/majutsu/make_role_tag.hpp
 	include/majutsu/make_role_tag_arg.hpp
 	include/majutsu/make_role_tag_arg_fwd.hpp
 	include/majutsu/make_role_tag_fwd.hpp
-	include/majutsu/memory/detail/expand_fusion_initlist.hpp
-	include/majutsu/memory/detail/index_of.hpp
-	include/majutsu/memory/detail/init_constants.hpp
-	include/majutsu/memory/detail/init_fusion_element.hpp
-	include/majutsu/memory/detail/init_raw_memory.hpp
-	include/majutsu/memory/detail/store_decl.hpp
-	include/majutsu/memory/detail/store_fwd.hpp
-	include/majutsu/memory/detail/store_impl.hpp
-	include/majutsu/memory/fusion.hpp
-	include/majutsu/memory/fusion_decl.hpp
-	include/majutsu/memory/fusion_fwd.hpp
-	include/majutsu/memory/fusion_impl.hpp
-	include/majutsu/memory/init_count.hpp
-	include/majutsu/memory/init_types.hpp
-	include/majutsu/memory/needs_init.hpp
-	include/majutsu/memory/raw.hpp
-	include/majutsu/memory/raw_decl.hpp
-	include/majutsu/memory/raw_fwd.hpp
-	include/majutsu/memory/raw_impl.hpp
-	include/majutsu/needed_size.hpp
-	include/majutsu/place.hpp
 	include/majutsu/placeholder.hpp
 	include/majutsu/placeholder_fwd.hpp
-	include/majutsu/raw_data.hpp
-	include/majutsu/raw_pointer.hpp
+	include/majutsu/raw/const_pointer.hpp
+	include/majutsu/raw/constant.hpp
+	include/majutsu/raw/constant_fwd.hpp
+	include/majutsu/raw/data.hpp
+	include/majutsu/raw/detail/copy_n.hpp
+	include/majutsu/raw/detail/init.hpp
+	include/majutsu/raw/detail/init_constants.hpp
+	include/majutsu/raw/detail/init_types.hpp
+	include/majutsu/raw/detail/needs_init.hpp
+	include/majutsu/raw/detail/static_size_base.hpp
+	include/majutsu/raw/detail/store_decl.hpp
+	include/majutsu/raw/detail/store_fwd.hpp
+	include/majutsu/raw/detail/store_impl.hpp
+	include/majutsu/raw/element_type.hpp
+	include/majutsu/raw/extract_constant.hpp
+	include/majutsu/raw/fundamental.hpp
+	include/majutsu/raw/fundamental_decl.hpp
+	include/majutsu/raw/fundamental_fwd.hpp
+	include/majutsu/raw/integral_size.hpp
+	include/majutsu/raw/is_constant.hpp
+	include/majutsu/raw/is_static_size.hpp
+	include/majutsu/raw/make.hpp
+	include/majutsu/raw/needed_size.hpp
+	include/majutsu/raw/place.hpp
+	include/majutsu/raw/pointer.hpp
+	include/majutsu/raw/record.hpp
+	include/majutsu/raw/record_decl.hpp
+	include/majutsu/raw/record_fwd.hpp
+	include/majutsu/raw/record_impl.hpp
+	include/majutsu/raw/size_type.hpp
+	include/majutsu/raw/static_size.hpp
 	include/majutsu/role.hpp
 	include/majutsu/role_fwd.hpp
 	include/majutsu/role_init_decl.hpp
@@ -125,11 +123,8 @@ set(
 	include/majutsu/role_tag_fwd.hpp
 	include/majutsu/role_tag_impl.hpp
 	include/majutsu/set.hpp
-	include/majutsu/simple.hpp
-	include/majutsu/simple_fwd.hpp
-	include/majutsu/size_type.hpp
-	include/majutsu/static_size.hpp
 	include/majutsu/unwrap_role.hpp
+	include/majutsu/unwrap_role_tpl.hpp
 )
 
 fcppt_utils_add_source_groups(

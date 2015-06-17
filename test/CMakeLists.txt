@@ -10,10 +10,6 @@ function(
 endfunction()
 
 add_majutsu_test(
-	class
-)
-
-add_majutsu_test(
 	fusion
 )
 

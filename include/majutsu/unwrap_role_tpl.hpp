@@ -4,10 +4,10 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_UNWRAP_ROLE_HPP_INCLUDED
-#define MAJUTSU_UNWRAP_ROLE_HPP_INCLUDED
+#ifndef MAJUTSU_UNWRAP_ROLE_TPL_HPP_INCLUDED
+#define MAJUTSU_UNWRAP_ROLE_TPL_HPP_INCLUDED
 
-#include <majutsu/unwrap_role_tpl.hpp>
+#include <majutsu/role_fwd.hpp>
 
 
 namespace majutsu
@@ -16,13 +16,23 @@ namespace majutsu
 template<
 	typename Type
 >
-using
-unwrap_role
-=
-typename
-majutsu::unwrap_role_tpl<
-	Type
->::type;
+struct unwrap_role_tpl;
+
+template<
+	typename Type,
+	typename Tag
+>
+struct unwrap_role_tpl<
+	majutsu::role<
+		Type,
+		Tag
+	>
+>
+{
+	typedef
+	Tag
+	type;
+};
 
 }
 

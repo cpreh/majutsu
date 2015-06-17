@@ -16,6 +16,7 @@ namespace majutsu
 template<
 	typename T
 >
+inline
 majutsu::dispatch_type<
 	T
 >

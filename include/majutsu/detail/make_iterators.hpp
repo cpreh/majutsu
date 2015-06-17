@@ -7,9 +7,6 @@
 #ifndef MAJUTSU_DETAIL_MAKE_ITERATORS_HPP_INCLUDED
 #define MAJUTSU_DETAIL_MAKE_ITERATORS_HPP_INCLUDED
 
-#include <fcppt/preprocessor/disable_gcc_warning.hpp>
-#include <fcppt/preprocessor/pop_warning.hpp>
-#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/iter_fold.hpp>
 #include <boost/mpl/placeholders.hpp>
@@ -23,14 +20,12 @@ namespace majutsu
 namespace detail
 {
 
-FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
-
 template<
 	typename Sequence
 >
-struct make_iterators
-:
+using make_iterators
+=
+typename
 boost::mpl::iter_fold<
 	Sequence,
 	boost::mpl::vector0<>,
@@ -38,10 +33,7 @@ boost::mpl::iter_fold<
 		boost::mpl::_1,
 		boost::mpl::_2
 	>
->
-{};
-
-FCPPT_PP_POP_WARNING
+>::type;
 
 }
 }

@@ -34,7 +34,7 @@ public:
 	);
 
 	Value
-	value() const;
+	value();
 private:
 	Value value_;
 };

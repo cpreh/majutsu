@@ -7,7 +7,6 @@
 #ifndef MAJUTSU_SET_HPP_INCLUDED
 #define MAJUTSU_SET_HPP_INCLUDED
 
-#include <majutsu/class.hpp>
 #include <majutsu/role_return_type.hpp>
 
 
@@ -16,26 +15,16 @@ namespace majutsu
 
 template<
 	typename Role,
-	typename Types,
-	template<
-		typename
-	> class Memory
+	typename Record
 >
+inline
 void
 set(
-	majutsu::class_<
-		Types,
-		Memory
-	> &_arg,
-	typename
+	Record &_arg,
 	majutsu::role_return_type<
-		typename
-		majutsu::class_<
-			Types,
-			Memory
-		>::memory_type::types,
+		Record,
 		Role
-	>::type const &_value
+	> const &_value
 )
 {
 	_arg. template set<

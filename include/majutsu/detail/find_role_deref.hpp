@@ -4,14 +4,12 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_DETAIL_FIND_ROLE_HPP_INCLUDED
-#define MAJUTSU_DETAIL_FIND_ROLE_HPP_INCLUDED
+#ifndef MAJUTSU_DETAIL_FIND_ROLE_DEREF_HPP_INCLUDED
+#define MAJUTSU_DETAIL_FIND_ROLE_DEREF_HPP_INCLUDED
 
-#include <majutsu/unwrap_role_tpl.hpp>
+#include <majutsu/detail/find_role.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/find_if.hpp>
-#include <boost/mpl/placeholders.hpp>
-#include <type_traits>
+#include <boost/mpl/deref.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -24,15 +22,13 @@ template<
 	typename Elements,
 	typename Role
 >
-using find_role
+using
+find_role_deref
 =
 typename
-boost::mpl::find_if<
-	Elements,
-	std::is_same<
-		majutsu::unwrap_role_tpl<
-			boost::mpl::_1
-		>,
+boost::mpl::deref<
+	majutsu::detail::find_role<
+		Elements,
 		Role
 	>
 >::type;

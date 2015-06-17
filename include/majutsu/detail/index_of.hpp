@@ -4,14 +4,12 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_DETAIL_FIND_ROLE_HPP_INCLUDED
-#define MAJUTSU_DETAIL_FIND_ROLE_HPP_INCLUDED
+#ifndef MAJUTSU_DETAIL_INDEX_OF_HPP_INCLUDED
+#define MAJUTSU_DETAIL_INDEX_OF_HPP_INCLUDED
 
-#include <majutsu/unwrap_role_tpl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/find_if.hpp>
-#include <boost/mpl/placeholders.hpp>
-#include <type_traits>
+#include <boost/mpl/begin.hpp>
+#include <boost/mpl/distance.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -22,19 +20,16 @@ namespace detail
 
 template<
 	typename Elements,
-	typename Role
+	typename Iterator
 >
-using find_role
+using index_of
 =
 typename
-boost::mpl::find_if<
-	Elements,
-	std::is_same<
-		majutsu::unwrap_role_tpl<
-			boost::mpl::_1
-		>,
-		Role
-	>
+boost::mpl::distance<
+	typename boost::mpl::begin<
+		Elements
+	>::type,
+	Iterator
 >::type;
 
 }

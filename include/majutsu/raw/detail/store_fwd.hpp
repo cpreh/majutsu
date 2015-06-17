@@ -4,29 +4,30 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_ROLE_RETURN_TYPE_HPP_INCLUDED
-#define MAJUTSU_ROLE_RETURN_TYPE_HPP_INCLUDED
+#ifndef MAJUTSU_RAW_DETAIL_STORE_FWD_HPP_INCLUDED
+#define MAJUTSU_RAW_DETAIL_STORE_FWD_HPP_INCLUDED
 
-#include <majutsu/detail/find_role.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/deref.hpp>
+#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
 {
+namespace raw
+{
+namespace detail
+{
 
 template<
-	typename Memory,
-	typename Role
+	typename T,
+	typename Alloc =
+		std::allocator<T>
 >
-using role_return_type
-=
-typename
-Memory:: template role_return_type<
-	Role
->::type;
+class store;
 
+}
+}
 }
 
 #endif

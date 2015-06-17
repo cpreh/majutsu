@@ -4,10 +4,9 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_ROLE_HPP_INCLUDED
-#define MAJUTSU_ROLE_HPP_INCLUDED
+#ifndef MAJUTSU_ACCESS_ROLE_TPL_HPP_INCLUDED
+#define MAJUTSU_ACCESS_ROLE_TPL_HPP_INCLUDED
 
-#include <majutsu/is_role_tag.hpp>
 #include <majutsu/role_fwd.hpp>
 
 
@@ -15,25 +14,24 @@ namespace majutsu
 {
 
 template<
+	typename
+>
+struct access_role_tpl;
+
+template<
 	typename Type,
 	typename Tag
 >
-struct role
+struct access_role_tpl<
+	majutsu::role<
+		Type,
+		Tag
+	>
+>
 {
 	typedef
 	Type
-	wrapped;
-
-	typedef
-	Tag
-	tag;
-
-	static_assert(
-		majutsu::is_role_tag<
-			tag
-		>::value,
-		"Tag of role<> must be a role_tag"
-	);
+	type;
 };
 
 }

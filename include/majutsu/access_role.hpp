@@ -7,30 +7,22 @@
 #ifndef MAJUTSU_ACCESS_ROLE_HPP_INCLUDED
 #define MAJUTSU_ACCESS_ROLE_HPP_INCLUDED
 
-#include <majutsu/role_fwd.hpp>
+#include <majutsu/access_role_tpl.hpp>
 
 
 namespace majutsu
 {
 
 template<
-	typename
+	typename Type
 >
-struct access_role;
-
-template<
-	typename Type,
-	typename Tag
->
-struct access_role<
-	majutsu::role<
-		Type,
-		Tag
-	>
->
-{
-	typedef Type type;
-};
+using
+access_role
+=
+typename
+majutsu::access_role_tpl<
+	Type
+>::type;
 
 }
 

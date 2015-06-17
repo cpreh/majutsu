@@ -4,29 +4,31 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_ROLE_RETURN_TYPE_HPP_INCLUDED
-#define MAJUTSU_ROLE_RETURN_TYPE_HPP_INCLUDED
+#ifndef MAJUTSU_RAW_INTEGRAL_SIZE_HPP_INCLUDED
+#define MAJUTSU_RAW_INTEGRAL_SIZE_HPP_INCLUDED
 
-#include <majutsu/detail/find_role.hpp>
+#include <majutsu/raw/size_type.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/deref.hpp>
+#include <boost/mpl/integral_c.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
 {
+namespace raw
+{
 
 template<
-	typename Memory,
-	typename Role
+	majutsu::raw::size_type Size
 >
-using role_return_type
+using integral_size
 =
-typename
-Memory:: template role_return_type<
-	Role
->::type;
+boost::mpl::integral_c<
+	majutsu::raw::size_type,
+	Size
+>;
 
+}
 }
 
 #endif

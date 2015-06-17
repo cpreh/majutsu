@@ -8,6 +8,9 @@
 #define MAJUTSU_ROLE_INIT_IMPL_HPP_INCLUDED
 
 #include <majutsu/role_init_decl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 template<
@@ -22,7 +25,11 @@ majutsu::role_init<
 )
 :
 	value_(
-		_value
+		std::forward<
+			Value
+		>(
+			_value
+		)
 	)
 {
 }
@@ -35,10 +42,14 @@ Value
 majutsu::role_init<
 	Tag,
 	Value
->::value() const
+>::value()
 {
 	return
-		value_;
+		std::forward<
+			Value
+		>(
+			value_
+		);
 }
 
 #endif

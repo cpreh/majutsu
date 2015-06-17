@@ -4,11 +4,10 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_DETAIL_WRAPPED_TYPE_HPP_INCLUDED
-#define MAJUTSU_DETAIL_WRAPPED_TYPE_HPP_INCLUDED
+#ifndef MAJUTSU_RAW_STATIC_SIZE_HPP_INCLUDED
+#define MAJUTSU_RAW_STATIC_SIZE_HPP_INCLUDED
 
-#include <majutsu/access_role_tpl.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <majutsu/raw/detail/static_size_base.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -16,37 +15,18 @@
 
 namespace majutsu
 {
-namespace detail
+namespace raw
 {
-
-template<
-	typename Type
->
-struct wrapped_type
-{
-	typedef Type type;
-};
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
 template<
-	typename Type,
-	typename Tag
+	typename T
 >
-struct wrapped_type<
-	majutsu::role<
-		Type,
-		Tag
-	>
->
+struct static_size
 :
-majutsu::access_role_tpl<
-	majutsu::role<
-		Type,
-		Tag
-	>
->
+majutsu::raw::detail::static_size_base
 {
 };
 

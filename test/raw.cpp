@@ -1,8 +1,7 @@
-#include <majutsu/composite.hpp>
-#include <majutsu/fundamental.hpp>
 #include <majutsu/make_role_tag.hpp>
 #include <majutsu/role.hpp>
-#include <majutsu/memory/raw.hpp>
+#include <majutsu/raw/fundamental.hpp>
+#include <majutsu/raw/record.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -20,13 +19,13 @@ BOOST_AUTO_TEST_CASE(
 )
 {
 	typedef
-	majutsu::fundamental<
+	majutsu::raw::fundamental<
 		int
 	>
 	int_;
 
 	typedef
-	majutsu::fundamental<
+	majutsu::raw::fundamental<
 		bool
 	>
 	bool_;
@@ -40,17 +39,15 @@ BOOST_AUTO_TEST_CASE(
 	);
 
 	typedef
-	majutsu::memory::raw<
-		majutsu::composite<
-			boost::mpl::vector2<
-				majutsu::role<
-					int_,
-					int_role
-				>,
-				majutsu::role<
-					bool_,
-					bool_role
-				>
+	majutsu::raw::record<
+		boost::mpl::vector2<
+			majutsu::role<
+				int_,
+				int_role
+			>,
+			majutsu::role<
+				bool_,
+				bool_role
 			>
 		>
 	>

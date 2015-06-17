@@ -7,7 +7,6 @@
 #ifndef MAJUTSU_GET_HPP_INCLUDED
 #define MAJUTSU_GET_HPP_INCLUDED
 
-#include <majutsu/class.hpp>
 #include <majutsu/role_return_type.hpp>
 
 
@@ -16,25 +15,15 @@ namespace majutsu
 
 template<
 	typename Role,
-	typename Types,
-	template<
-		typename
-	> class Memory
+	typename Record
 >
-typename
+inline
 majutsu::role_return_type<
-	typename
-	majutsu::class_<
-		Types,
-		Memory
-	>::memory_type::types,
+	Record,
 	Role
->::type
+>
 get(
-	majutsu::class_<
-		Types,
-		Memory
-	> const &_arg
+	Record const &_arg
 )
 {
 	return

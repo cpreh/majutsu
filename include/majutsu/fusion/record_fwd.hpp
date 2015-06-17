@@ -4,26 +4,21 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_UNWRAP_ROLE_HPP_INCLUDED
-#define MAJUTSU_UNWRAP_ROLE_HPP_INCLUDED
-
-#include <majutsu/unwrap_role_tpl.hpp>
+#ifndef MAJUTSU_FUSION_RECORD_FWD_HPP_INCLUDED
+#define MAJUTSU_FUSION_RECORD_FWD_HPP_INCLUDED
 
 
 namespace majutsu
+{
+namespace fusion
 {
 
 template<
 	typename Type
 >
-using
-unwrap_role
-=
-typename
-majutsu::unwrap_role_tpl<
-	Type
->::type;
+class record;
 
+}
 }
 
 #endif

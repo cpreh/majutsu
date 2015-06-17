@@ -4,29 +4,38 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_ROLE_RETURN_TYPE_HPP_INCLUDED
-#define MAJUTSU_ROLE_RETURN_TYPE_HPP_INCLUDED
+#ifndef MAJUTSU_RAW_FUNDAMENTAL_DECL_HPP_INCLUDED
+#define MAJUTSU_RAW_FUNDAMENTAL_DECL_HPP_INCLUDED
 
-#include <majutsu/detail/find_role.hpp>
+#include <majutsu/raw/fundamental_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/deref.hpp>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
 {
+namespace raw
+{
 
 template<
-	typename Memory,
-	typename Role
+	typename Type
 >
-using role_return_type
-=
-typename
-Memory:: template role_return_type<
-	Role
->::type;
+struct fundamental
+{
+	typedef
+	Type
+	element_type;
 
+	static_assert(
+		std::is_fundamental<
+			Type
+		>::value,
+		"T must be fundamental"
+	);
+};
+
+}
 }
 
 #endif

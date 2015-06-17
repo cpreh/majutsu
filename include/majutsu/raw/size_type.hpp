@@ -4,26 +4,22 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_UNWRAP_ROLE_HPP_INCLUDED
-#define MAJUTSU_UNWRAP_ROLE_HPP_INCLUDED
+#ifndef MAJUTSU_RAW_SIZE_TYPE_HPP_INCLUDED
+#define MAJUTSU_RAW_SIZE_TYPE_HPP_INCLUDED
 
-#include <majutsu/unwrap_role_tpl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <cstddef>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
 {
+namespace raw
+{
 
-template<
-	typename Type
->
-using
-unwrap_role
-=
-typename
-majutsu::unwrap_role_tpl<
-	Type
->::type;
+typedef std::size_t size_type;
 
+}
 }
 
 #endif

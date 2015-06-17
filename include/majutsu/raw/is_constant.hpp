@@ -4,43 +4,67 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_DETAIL_CONTAINS_INITIALIZER_HPP_INCLUDED
-#define MAJUTSU_DETAIL_CONTAINS_INITIALIZER_HPP_INCLUDED
+#ifndef MAJUTSU_RAW_IS_CONSTANT_HPP_INCLUDED
+#define MAJUTSU_RAW_IS_CONSTANT_HPP_INCLUDED
 
-#include <majutsu/unwrap_role.hpp>
-#include <majutsu/detail/tag_is_same.hpp>
-#include <fcppt/mpl/contains_if.hpp>
+#include <majutsu/role_fwd.hpp>
+#include <majutsu/raw/constant_fwd.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/placeholders.hpp>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
 {
-namespace detail
+namespace raw
 {
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
 template<
-	typename Args,
-	typename Element
+	typename Type
 >
-struct contains_initializer
+struct is_constant
 :
-fcppt::mpl::contains_if<
-	Args,
-	majutsu::detail::tag_is_same<
-		majutsu::unwrap_role<
-			Element
-		>,
-		boost::mpl::_1
+std::false_type
+{
+};
+
+template<
+	typename Type,
+	typename Type::type Value
+>
+struct is_constant<
+	majutsu::raw::constant<
+		Type,
+		Value
 	>
 >
+:
+std::true_type
+{
+};
+
+template<
+	typename Type,
+	typename Type::type Value,
+	typename Alias
+>
+struct is_constant<
+	majutsu::role<
+		majutsu::raw::constant<
+			Type,
+			Value
+		>,
+		Alias
+	>
+>
+:
+std::true_type
 {
 };
 
