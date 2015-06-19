@@ -7,6 +7,7 @@
 #ifndef MAJUTSU_RAW_DETAIL_INIT_CONSTANTS_HPP_INCLUDED
 #define MAJUTSU_RAW_DETAIL_INIT_CONSTANTS_HPP_INCLUDED
 
+#include <majutsu/access_role.hpp>
 #include <majutsu/raw/is_constant.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -45,11 +46,15 @@ public:
 	template<
 		typename Iterator
 	>
-	typename boost::enable_if<
+	typename
+	boost::enable_if<
 		majutsu::raw::is_constant<
-			typename boost::mpl::deref<
-				Iterator
-			>::type
+			majutsu::access_role<
+				typename
+				boost::mpl::deref<
+					Iterator
+				>::type
+			>
 		>,
 		void
 	>::type
@@ -57,25 +62,30 @@ public:
 		Iterator &
 	) const
 	{
-		typedef typename boost::mpl::deref<
-			Iterator
-		>::type type;
-
 		mem_. template set_internal<
 			Iterator
 		>(
-			type::value
+			majutsu::access_role<
+				typename
+				boost::mpl::deref<
+					Iterator
+				>::type
+			>::constant_value::value
 		);
 	}
 
 	template<
 		typename Iterator
 	>
-	typename boost::disable_if<
+	typename
+	boost::disable_if<
 		majutsu::raw::is_constant<
-			typename boost::mpl::deref<
-				Iterator
-			>::type
+			majutsu::access_role<
+				typename
+				boost::mpl::deref<
+					Iterator
+				>::type
+			>
 		>,
 		void
 	>::type

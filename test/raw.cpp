@@ -1,5 +1,6 @@
 #include <majutsu/make_role_tag.hpp>
 #include <majutsu/role.hpp>
+#include <majutsu/raw/constant.hpp>
 #include <majutsu/raw/fundamental.hpp>
 #include <majutsu/raw/record.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
@@ -18,6 +19,8 @@ BOOST_AUTO_TEST_CASE(
 	raw
 )
 {
+FCPPT_PP_POP_WARNING
+
 	typedef
 	majutsu::raw::fundamental<
 		int
@@ -38,9 +41,20 @@ BOOST_AUTO_TEST_CASE(
 		bool_role
 	);
 
+	MAJUTSU_MAKE_ROLE_TAG(
+		constant_role
+	);
+
 	typedef
 	majutsu::raw::record<
-		boost::mpl::vector2<
+		boost::mpl::vector3<
+			majutsu::role<
+				majutsu::raw::constant<
+					int_,
+					42
+				>,
+				constant_role
+			>,
 			majutsu::role<
 				int_,
 				int_role
@@ -57,12 +71,17 @@ BOOST_AUTO_TEST_CASE(
 		int_role{} = 4,
 		bool_role{} = true
 	);
+	BOOST_CHECK_EQUAL(
+		test.get<
+			constant_role
+		>(),
+		42
+	);
 
-	BOOST_CHECK(
+	BOOST_CHECK_EQUAL(
 		test.get<
 			int_role
-		>()
-		==
+		>(),
 		4
 	);
 

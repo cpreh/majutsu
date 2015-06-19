@@ -14,5 +14,9 @@ add_majutsu_test(
 )
 
 add_majutsu_test(
+	init
+)
+
+add_majutsu_test(
 	raw
 )

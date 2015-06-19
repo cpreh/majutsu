@@ -302,6 +302,7 @@ majutsu::raw::record<
 	Types
 >::init()
 {
+	// TODO: Initialize this directly!
 	std::fill(
 		sizes_.begin(),
 		sizes_.end(),

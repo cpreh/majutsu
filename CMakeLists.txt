@@ -52,14 +52,13 @@ set(
 	MAJUTSU_FILES
 	include/majutsu/access_role.hpp
 	include/majutsu/access_role_tpl.hpp
-	include/majutsu/bind.hpp
-	include/majutsu/bind_fwd.hpp
 	include/majutsu/detail/all_initializers.hpp
 	include/majutsu/detail/contains_initializer.hpp
 	include/majutsu/detail/find_role.hpp
 	include/majutsu/detail/find_role_deref.hpp
 	include/majutsu/detail/flatten.hpp
 	include/majutsu/detail/index_of.hpp
+	include/majutsu/detail/init.hpp
 	include/majutsu/detail/make_iterators.hpp
 	include/majutsu/detail/tag_is_same.hpp
 	include/majutsu/detail/wrapped_type.hpp
@@ -73,14 +72,14 @@ set(
 	include/majutsu/fusion/record_fwd.hpp
 	include/majutsu/fusion/record_impl.hpp
 	include/majutsu/get.hpp
+	include/majutsu/init.hpp
+	include/majutsu/init_types.hpp
 	include/majutsu/is_role.hpp
 	include/majutsu/is_role_tag.hpp
 	include/majutsu/make_role_tag.hpp
 	include/majutsu/make_role_tag_arg.hpp
 	include/majutsu/make_role_tag_arg_fwd.hpp
 	include/majutsu/make_role_tag_fwd.hpp
-	include/majutsu/placeholder.hpp
-	include/majutsu/placeholder_fwd.hpp
 	include/majutsu/raw/const_pointer.hpp
 	include/majutsu/raw/constant.hpp
 	include/majutsu/raw/constant_fwd.hpp
@@ -122,6 +121,7 @@ set(
 	include/majutsu/role_tag_decl.hpp
 	include/majutsu/role_tag_fwd.hpp
 	include/majutsu/role_tag_impl.hpp
+	include/majutsu/role_value_type.hpp
 	include/majutsu/set.hpp
 	include/majutsu/unwrap_role.hpp
 	include/majutsu/unwrap_role_tpl.hpp

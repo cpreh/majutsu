@@ -7,11 +7,6 @@
 #ifndef MAJUTSU_ROLE_RETURN_TYPE_HPP_INCLUDED
 #define MAJUTSU_ROLE_RETURN_TYPE_HPP_INCLUDED
 
-#include <majutsu/detail/find_role.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/deref.hpp>
-#include <fcppt/config/external_end.hpp>
-
 
 namespace majutsu
 {

@@ -26,22 +26,25 @@ namespace fusion
 {
 
 template<
-	typename Type
+	typename Types
 >
 class record
 {
-// TODO
 public:
 	typedef
 	majutsu::flatten<
-		Type
+		Types
 	>
 	all_types;
 public:
+	typedef
+	all_types
+	init_types;
+
 	template<
 		typename Role
 	>
-	struct role_return_type
+	struct role_value_type
 	{
 		typedef
 		majutsu::access_role<
@@ -49,7 +52,20 @@ public:
 				all_types,
 				Role
 			>
-		> const &
+		>
+		type;
+	};
+
+	template<
+		typename Role
+	>
+	struct role_return_type
+	{
+		typedef
+		typename
+		role_value_type<
+			Role
+		>::type const &
 		type;
 	};
 

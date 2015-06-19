@@ -4,18 +4,21 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_BIND_FWD_HPP_INCLUDED
-#define MAJUTSU_BIND_FWD_HPP_INCLUDED
+#ifndef MAJUTSU_INIT_TYPES_HPP_INCLUDED
+#define MAJUTSU_INIT_TYPES_HPP_INCLUDED
 
 
 namespace majutsu
 {
 
 template<
-	typename Base,
-	typename Binders
+	typename Record
 >
-struct bind;
+using
+init_types
+=
+typename
+Record::init_types;
 
 }
 

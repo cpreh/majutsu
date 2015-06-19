@@ -7,7 +7,6 @@
 #ifndef MAJUTSU_RAW_IS_CONSTANT_HPP_INCLUDED
 #define MAJUTSU_RAW_IS_CONSTANT_HPP_INCLUDED
 
-#include <majutsu/role_fwd.hpp>
 #include <majutsu/raw/constant_fwd.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -36,31 +35,12 @@ std::false_type
 
 template<
 	typename Type,
-	typename Type::type Value
+	typename Type::element_type Value
 >
 struct is_constant<
 	majutsu::raw::constant<
 		Type,
 		Value
-	>
->
-:
-std::true_type
-{
-};
-
-template<
-	typename Type,
-	typename Type::type Value,
-	typename Alias
->
-struct is_constant<
-	majutsu::role<
-		majutsu::raw::constant<
-			Type,
-			Value
-		>,
-		Alias
 	>
 >
 :

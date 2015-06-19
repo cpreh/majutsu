@@ -16,6 +16,7 @@
 #include <majutsu/raw/pointer.hpp>
 #include <majutsu/raw/record_fwd.hpp>
 #include <majutsu/raw/size_type.hpp>
+#include <majutsu/raw/detail/init_types.hpp>
 #include <majutsu/raw/detail/store_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/size.hpp>
@@ -63,10 +64,16 @@ public:
 	Types
 	types;
 
+	typedef
+	majutsu::raw::detail::init_types<
+		flattened_types
+	>
+	init_types;
+
 	template<
 		typename Role
 	>
-	struct role_return_type
+	struct role_value_type
 	{
 		typedef
 		majutsu::raw::element_type<
@@ -77,6 +84,19 @@ public:
 				>
 			>
 		>
+		type;
+	};
+
+	template<
+		typename Role
+	>
+	struct role_return_type
+	{
+		typedef
+		typename
+		role_value_type<
+			Role
+		>::type
 		type;
 	};
 

@@ -4,18 +4,23 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_PLACEHOLDER_HPP_INCLUDED
-#define MAJUTSU_PLACEHOLDER_HPP_INCLUDED
-
-#include <majutsu/placeholder_fwd.hpp>
+#ifndef MAJUTSU_ROLE_VALUE_TYPE_HPP_INCLUDED
+#define MAJUTSU_ROLE_VALUE_TYPE_HPP_INCLUDED
 
 
 namespace majutsu
 {
 
-struct placeholder
-{
-};
+template<
+	typename Memory,
+	typename Role
+>
+using role_value_type
+=
+typename
+Memory:: template role_value_type<
+	Role
+>::type;
 
 }
 
