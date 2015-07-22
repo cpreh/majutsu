@@ -131,7 +131,7 @@ public:
 	void
 	set(
 		typename
-		role_return_type<
+		role_value_type<
 			Role
 		>::type
 	);

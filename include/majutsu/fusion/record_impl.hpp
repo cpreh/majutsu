@@ -190,7 +190,7 @@ majutsu::fusion::record<
 	Types
 >::set(
 	typename
-	role_return_type<
+	role_value_type<
 		Role
 	>::type _value
 )
@@ -206,7 +206,9 @@ majutsu::fusion::record<
 	>(
 		elements_
 	) =
-		_value;
+		std::move(
+			_value
+		);
 }
 
 template<

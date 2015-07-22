@@ -7,7 +7,10 @@
 #ifndef MAJUTSU_SET_HPP_INCLUDED
 #define MAJUTSU_SET_HPP_INCLUDED
 
-#include <majutsu/role_return_type.hpp>
+#include <majutsu/role_value_type.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
@@ -21,7 +24,7 @@ inline
 void
 set(
 	Record &_arg,
-	majutsu::role_return_type<
+	majutsu::role_value_type<
 		Record,
 		Role
 	> const &_value
@@ -31,6 +34,29 @@ set(
 		Role
 	>(
 		_value
+	);
+}
+
+template<
+	typename Role,
+	typename Record
+>
+inline
+void
+set(
+	Record &_arg,
+	majutsu::role_value_type<
+		Record,
+		Role
+	> &&_value
+)
+{
+	_arg. template set<
+		Role
+	>(
+		std::move(
+			_value
+		)
 	);
 }
 
