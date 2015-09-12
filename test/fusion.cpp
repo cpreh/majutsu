@@ -1,7 +1,7 @@
 #include <majutsu/make_role_tag.hpp>
 #include <majutsu/role.hpp>
 #include <majutsu/fusion/record.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -141,7 +141,7 @@ FCPPT_PP_POP_WARNING
 				42
 			},
 		move_only_role{} =
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				int
 			>(
 				42
