@@ -66,7 +66,6 @@ set(
 	include/majutsu/dispatch_value.hpp
 	include/majutsu/flatten.hpp
 	include/majutsu/fusion/detail/expand_initlist.hpp
-	include/majutsu/fusion/detail/init_element.hpp
 	include/majutsu/fusion/record.hpp
 	include/majutsu/fusion/record_decl.hpp
 	include/majutsu/fusion/record_fwd.hpp

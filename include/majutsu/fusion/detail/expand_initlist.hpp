@@ -7,11 +7,18 @@
 #ifndef MAJUTSU_FUSION_DETAIL_EXPAND_INITLIST_HPP_INCLUDED
 #define MAJUTSU_FUSION_DETAIL_EXPAND_INITLIST_HPP_INCLUDED
 
-#include <majutsu/fusion/detail/init_element.hpp>
+#include <majutsu/unwrap_role.hpp>
+#include <majutsu/detail/tag_is_same.hpp>
+#include <fcppt/decltype_sink.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/adapted/mpl.hpp>
+#include <boost/fusion/algorithm/query/find_if.hpp>
 #include <boost/fusion/algorithm/transformation/transform.hpp>
 #include <boost/fusion/container/vector/vector.hpp>
+#include <boost/fusion/iterator/deref.hpp>
+#include <boost/mpl/deref.hpp>
+#include <boost/mpl/find_if.hpp>
+#include <boost/mpl/placeholders.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -47,13 +54,50 @@ expand_initlist(
 	return
 		boost::fusion::transform(
 			Types(),
-			majutsu::fusion::detail::init_element<
-				decltype(
-					fusion_arguments
-				)
-			>(
-				fusion_arguments
+			[
+				&fusion_arguments
+			](
+				auto const &_role
 			)
+			{
+				typedef
+				FCPPT_DECLTYPE_SINK(
+					_role
+				)
+				role_type;
+
+				return
+					std::forward<
+						typename
+						boost::mpl::deref<
+							typename
+							boost::mpl::find_if<
+								decltype(
+									fusion_arguments
+								),
+								majutsu::detail::tag_is_same<
+									majutsu::unwrap_role<
+										role_type
+									>,
+									boost::mpl::_1
+								>
+							>::type
+						>::type::value_type
+					>(
+						boost::fusion::deref(
+							boost::fusion::find_if<
+								majutsu::detail::tag_is_same<
+									majutsu::unwrap_role<
+										role_type
+									>,
+									boost::mpl::_1
+								>
+							>(
+								fusion_arguments
+							)
+						).value()
+					);
+			}
 		);
 }
 
