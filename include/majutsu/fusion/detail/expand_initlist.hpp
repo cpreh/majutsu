@@ -16,8 +16,6 @@
 #include <boost/fusion/algorithm/transformation/transform.hpp>
 #include <boost/fusion/container/vector/vector.hpp>
 #include <boost/fusion/iterator/deref.hpp>
-#include <boost/mpl/deref.hpp>
-#include <boost/mpl/find_if.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -60,35 +58,15 @@ expand_initlist(
 				auto const &_role
 			)
 			{
-				typedef
-				FCPPT_DECLTYPE_SINK(
-					_role
-				)
-				role_type;
-
 				return
-					std::forward<
-						typename
-						boost::mpl::deref<
-							typename
-							boost::mpl::find_if<
-								decltype(
-									fusion_arguments
-								),
-								majutsu::detail::tag_is_same<
-									majutsu::unwrap_role<
-										role_type
-									>,
-									boost::mpl::_1
-								>
-							>::type
-						>::type::value_type
-					>(
+					std::move(
 						boost::fusion::deref(
 							boost::fusion::find_if<
 								majutsu::detail::tag_is_same<
 									majutsu::unwrap_role<
-										role_type
+										FCPPT_DECLTYPE_SINK(
+											_role
+										)
 									>,
 									boost::mpl::_1
 								>
