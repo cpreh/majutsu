@@ -4,14 +4,12 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_RAW_NEEDED_SIZE_HPP_INCLUDED
-#define MAJUTSU_RAW_NEEDED_SIZE_HPP_INCLUDED
+#ifndef MAJUTSU_RAW_NEEDED_SIZE_STATIC_HPP_INCLUDED
+#define MAJUTSU_RAW_NEEDED_SIZE_STATIC_HPP_INCLUDED
 
-#include <majutsu/dispatch_value.hpp>
-#include <majutsu/raw/element_type.hpp>
 #include <majutsu/raw/is_static_size.hpp>
-#include <majutsu/raw/needed_size_static.hpp>
 #include <majutsu/raw/size_type.hpp>
+#include <majutsu/raw/static_size.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -26,6 +24,7 @@ template<
 	typename Type
 >
 inline
+constexpr
 typename
 boost::enable_if<
 	majutsu::raw::is_static_size<
@@ -33,42 +32,12 @@ boost::enable_if<
 	>,
 	majutsu::raw::size_type
 >::type
-needed_size(
-	majutsu::raw::element_type<
-		Type
-	> const &
-)
+needed_size_static()
 {
 	return
-		majutsu::raw::needed_size_static<
+		majutsu::raw::static_size<
 			Type
-		>();
-}
-
-template<
-	typename Type
->
-inline
-typename
-boost::disable_if<
-	majutsu::raw::is_static_size<
-		Type
-	>,
-	majutsu::raw::size_type
->::type
-needed_size(
-	majutsu::raw::element_type<
-		Type
-	> const &_value
-)
-{
-	return
-		needed_size(
-			majutsu::dispatch_value<
-				Type
-			>(),
-			_value
-		);
+		>::value;
 }
 
 }

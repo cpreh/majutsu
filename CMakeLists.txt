@@ -104,6 +104,7 @@ set(
 	include/majutsu/raw/is_static_size.hpp
 	include/majutsu/raw/make.hpp
 	include/majutsu/raw/needed_size.hpp
+	include/majutsu/raw/needed_size_static.hpp
 	include/majutsu/raw/place.hpp
 	include/majutsu/raw/pointer.hpp
 	include/majutsu/raw/record.hpp
