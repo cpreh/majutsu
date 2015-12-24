@@ -10,6 +10,7 @@
 #include <majutsu/access_role.hpp>
 #include <majutsu/dispatch_type.hpp>
 #include <majutsu/get.hpp>
+#include <majutsu/init.hpp>
 #include <majutsu/unwrap_role.hpp>
 #include <majutsu/raw/combine_static_sizes.hpp>
 #include <majutsu/raw/const_pointer.hpp>
@@ -22,7 +23,6 @@
 #include <majutsu/raw/size_type.hpp>
 #include <majutsu/raw/static_size.hpp>
 #include <majutsu/raw/detail/copy_n.hpp>
-#include <majutsu/raw/detail/make_record.hpp>
 #include <fcppt/decltype_sink.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/tag_type.hpp>
@@ -33,6 +33,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/fold.hpp>
 #include <boost/mpl/placeholders.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -177,29 +178,51 @@ make(
 			Types
 		>
 	>,
-	majutsu::raw::const_pointer const _memory
+	majutsu::raw::const_pointer _memory
 )
 {
-	typedef
-	typename
-	majutsu::raw::record<
-		Types
-	>::all_types
-	types;
-
 	return
-		majutsu::raw::detail::make_record<
-			Types,
-			typename
-			boost::mpl::begin<
-				types
-			>::type,
-			typename
-			boost::mpl::end<
-				types
-			>::type
+		majutsu::init<
+			majutsu::raw::record<
+				Types
+			>
 		>(
-			_memory
+			[
+				&_memory
+			](
+				auto const _role
+			)
+			{
+				typedef
+				majutsu::access_role<
+					FCPPT_DECLTYPE_SINK(
+						_role
+					)
+				>
+				element;
+
+				majutsu::raw::element_type<
+					element
+				> value(
+					majutsu::raw::make<
+						element
+					>(
+						_memory
+					)
+				);
+
+				_memory +=
+					majutsu::raw::needed_size<
+						element
+					>(
+						value
+					);
+
+				return
+					std::move(
+						value
+					);
+			}
 		);
 }
 

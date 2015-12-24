@@ -90,7 +90,6 @@ set(
 	include/majutsu/raw/detail/init_constants.hpp
 	include/majutsu/raw/detail/init_types.hpp
 	include/majutsu/raw/detail/is_static_size.hpp
-	include/majutsu/raw/detail/make_record.hpp
 	include/majutsu/raw/detail/needs_init.hpp
 	include/majutsu/raw/detail/store_decl.hpp
 	include/majutsu/raw/detail/store_fwd.hpp
