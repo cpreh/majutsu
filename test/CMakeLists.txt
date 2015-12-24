@@ -1,11 +1,10 @@
 function(
 	add_majutsu_test
-	PATHNAME
+	FILENAME
 )
 	fcppt_utils_add_test(
-		${PATHNAME}
-		""
-		""
+		${FILENAME}
+		${ARGN}
 	)
 endfunction()
 
@@ -20,3 +19,13 @@ add_majutsu_test(
 add_majutsu_test(
 	raw
 )
+
+add_majutsu_test(
+	raw/combine_static_sizes
+	NO_CODE
+)
+
+add_majutsu_test(
+	raw/nested
+)
+

@@ -79,16 +79,19 @@ set(
 	include/majutsu/make_role_tag_arg.hpp
 	include/majutsu/make_role_tag_arg_fwd.hpp
 	include/majutsu/make_role_tag_fwd.hpp
+	include/majutsu/raw/combine_static_sizes.hpp
 	include/majutsu/raw/const_pointer.hpp
 	include/majutsu/raw/constant.hpp
 	include/majutsu/raw/constant_fwd.hpp
 	include/majutsu/raw/data.hpp
 	include/majutsu/raw/detail/copy_n.hpp
+	include/majutsu/raw/detail/dynamic_size.hpp
 	include/majutsu/raw/detail/init.hpp
 	include/majutsu/raw/detail/init_constants.hpp
 	include/majutsu/raw/detail/init_types.hpp
+	include/majutsu/raw/detail/is_static_size.hpp
+	include/majutsu/raw/detail/make_record.hpp
 	include/majutsu/raw/detail/needs_init.hpp
-	include/majutsu/raw/detail/static_size_base.hpp
 	include/majutsu/raw/detail/store_decl.hpp
 	include/majutsu/raw/detail/store_fwd.hpp
 	include/majutsu/raw/detail/store_impl.hpp
@@ -105,6 +108,7 @@ set(
 	include/majutsu/raw/place.hpp
 	include/majutsu/raw/pointer.hpp
 	include/majutsu/raw/record.hpp
+	include/majutsu/raw/record_binding.hpp
 	include/majutsu/raw/record_decl.hpp
 	include/majutsu/raw/record_fwd.hpp
 	include/majutsu/raw/record_impl.hpp

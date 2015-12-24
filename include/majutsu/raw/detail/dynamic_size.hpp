@@ -4,8 +4,8 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_RAW_DETAIL_STATIC_SIZE_BASE_HPP_INCLUDED
-#define MAJUTSU_RAW_DETAIL_STATIC_SIZE_BASE_HPP_INCLUDED
+#ifndef MAJUTSU_RAW_DETAIL_DYNAMIC_SIZE_HPP_INCLUDED
+#define MAJUTSU_RAW_DETAIL_DYNAMIC_SIZE_HPP_INCLUDED
 
 
 namespace majutsu
@@ -15,7 +15,7 @@ namespace raw
 namespace detail
 {
 
-struct static_size_base
+struct dynamic_size
 {
 };
 

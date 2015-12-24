@@ -7,7 +7,7 @@
 #ifndef MAJUTSU_RAW_STATIC_SIZE_HPP_INCLUDED
 #define MAJUTSU_RAW_STATIC_SIZE_HPP_INCLUDED
 
-#include <majutsu/raw/detail/static_size_base.hpp>
+#include <majutsu/raw/detail/dynamic_size.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -26,7 +26,7 @@ template<
 >
 struct static_size
 :
-majutsu::raw::detail::static_size_base
+majutsu::raw::detail::dynamic_size
 {
 };
 

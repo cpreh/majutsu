@@ -48,7 +48,7 @@ majutsu::raw::record<
 	static_assert(
 		boost::mpl::empty<
 			majutsu::raw::detail::init_types<
-				flattened_types
+				all_types
 			>
 		>::value,
 		"record not empty"
@@ -75,7 +75,7 @@ majutsu::raw::record<
 	static_assert(
 		boost::mpl::size<
 			majutsu::raw::detail::init_types<
-				flattened_types
+				all_types
 			>
 		>::value
 		==
@@ -88,7 +88,7 @@ majutsu::raw::record<
 	static_assert(
 		majutsu::detail::all_initializers<
 			majutsu::raw::detail::init_types<
-				flattened_types
+				all_types
 			>,
 			boost::mpl::vector<
 				Args...
@@ -187,7 +187,7 @@ majutsu::raw::record<
 {
 	this->set_internal<
 		majutsu::detail::find_role<
-			flattened_types,
+			all_types,
 			Role
 		>
 	>(
@@ -213,7 +213,7 @@ majutsu::raw::record<
 {
 	typedef
 	majutsu::detail::find_role<
-		flattened_types,
+		all_types,
 		Role
 	>
 	role_iter;
@@ -233,7 +233,7 @@ majutsu::raw::record<
 
 	majutsu::raw::size_type const index(
 		majutsu::detail::index_of<
-			flattened_types,
+			all_types,
 			role_iter
 		>::value
 	);
@@ -311,7 +311,7 @@ majutsu::raw::record<
 
 	boost::mpl::for_each<
 		typename majutsu::detail::make_iterators<
-			flattened_types
+			all_types
 		>::type
 	>(
 		majutsu::raw::detail::init_constants<
@@ -348,7 +348,7 @@ majutsu::raw::record<
 
 	majutsu::raw::size_type const index(
 		majutsu::detail::index_of<
-			flattened_types,
+			all_types,
 			Iterator
 		>::value
 	);

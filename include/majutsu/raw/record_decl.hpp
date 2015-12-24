@@ -36,20 +36,26 @@ class record
 {
 public:
 	typedef
+	majutsu::raw::record<
+		Types
+	>
+	element_type;
+
+	typedef
 	majutsu::raw::data
 	value_type;
-private:
+
 	typedef
 	majutsu::flatten<
 		Types
 	>
-	flattened_types;
-
+	all_types;
+private:
 	typedef
 	std::array<
 		majutsu::raw::size_type,
 		boost::mpl::size<
-			flattened_types
+			all_types
 		>::value
 	>
 	size_vector;
@@ -66,7 +72,7 @@ public:
 
 	typedef
 	majutsu::raw::detail::init_types<
-		flattened_types
+		all_types
 	>
 	init_types;
 
@@ -79,7 +85,7 @@ public:
 		majutsu::raw::element_type<
 			majutsu::access_role<
 				majutsu::detail::find_role_deref<
-					flattened_types,
+					all_types,
 					Role
 				>
 			>

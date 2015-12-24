@@ -7,6 +7,7 @@
 #ifndef MAJUTSU_RAW_RECORD_HPP_INCLUDED
 #define MAJUTSU_RAW_RECORD_HPP_INCLUDED
 
+#include <majutsu/raw/record_binding.hpp>
 #include <majutsu/raw/record_decl.hpp>
 #include <majutsu/raw/record_fwd.hpp>
 #include <majutsu/raw/record_impl.hpp>
