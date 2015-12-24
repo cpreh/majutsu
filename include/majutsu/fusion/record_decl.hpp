@@ -10,8 +10,8 @@
 #include <majutsu/access_role.hpp>
 #include <majutsu/access_role_tpl.hpp>
 #include <majutsu/flatten.hpp>
-#include <majutsu/fusion/record_fwd.hpp>
 #include <majutsu/detail/find_role_deref.hpp>
+#include <majutsu/fusion/record_fwd.hpp>
 #include <fcppt/no_init_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/container/vector.hpp>

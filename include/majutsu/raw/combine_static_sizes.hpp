@@ -7,8 +7,8 @@
 #ifndef MAJUTSU_RAW_COMBINE_STATIC_SIZES_HPP_INCLUDED
 #define MAJUTSU_RAW_COMBINE_STATIC_SIZES_HPP_INCLUDED
 
-#include <majutsu/raw/detail/is_static_size.hpp>
 #include <majutsu/raw/detail/dynamic_size.hpp>
+#include <majutsu/raw/detail/is_static_size.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
