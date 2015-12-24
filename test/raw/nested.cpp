@@ -2,12 +2,11 @@
 #include <majutsu/make_role_tag.hpp>
 #include <majutsu/role.hpp>
 #include <majutsu/raw/fundamental.hpp>
-#include <majutsu/raw/record.hpp>
+#include <majutsu/raw/record_variadic.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
 #include <boost/test/unit_test.hpp>
 #include <fcppt/config/external_end.hpp>
 
@@ -46,31 +45,27 @@ FCPPT_PP_POP_WARNING
 	);
 
 	typedef
-	majutsu::raw::record<
-		boost::mpl::vector2<
-			majutsu::role<
-				bool_,
-				bool_role
-			>,
-			majutsu::role<
-				int_,
-				int_role
-			>
+	majutsu::raw::record_variadic<
+		majutsu::role<
+			bool_,
+			bool_role
+		>,
+		majutsu::role<
+			int_,
+			int_role
 		>
 	>
 	inner_record;
 
 	typedef
-	majutsu::raw::record<
-		boost::mpl::vector2<
-			majutsu::role<
-				int_,
-				int_role
-			>,
-			majutsu::role<
-				inner_record,
-				record_role
-			>
+	majutsu::raw::record_variadic<
+		majutsu::role<
+			int_,
+			int_role
+		>,
+		majutsu::role<
+			inner_record,
+			record_role
 		>
 	>
 	test_record;

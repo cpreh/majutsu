@@ -112,6 +112,8 @@ set(
 	include/majutsu/raw/record_decl.hpp
 	include/majutsu/raw/record_fwd.hpp
 	include/majutsu/raw/record_impl.hpp
+	include/majutsu/raw/record_variadic.hpp
+	include/majutsu/raw/record_variadic_fwd.hpp
 	include/majutsu/raw/size_type.hpp
 	include/majutsu/raw/static_size.hpp
 	include/majutsu/role.hpp
