@@ -29,3 +29,6 @@ add_majutsu_test(
 	raw/nested
 )
 
+add_majutsu_test(
+	raw/stream
+)

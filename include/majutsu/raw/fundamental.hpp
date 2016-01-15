@@ -15,6 +15,10 @@
 #include <majutsu/raw/size_type.hpp>
 #include <majutsu/raw/static_size.hpp>
 #include <majutsu/raw/detail/copy_n.hpp>
+#include <majutsu/raw/stream/read.hpp>
+#include <majutsu/raw/stream/reference.hpp>
+#include <majutsu/raw/stream/result.hpp>
+#include <majutsu/raw/stream/return_if.hpp>
 #include <fcppt/cast/to_char_ptr.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -108,6 +112,61 @@ make(
 
 	return
 		ret;
+}
+
+template<
+	typename Type,
+	typename Stream
+>
+inline
+majutsu::raw::stream::result<
+	Stream,
+	majutsu::raw::fundamental<
+		Type
+	>
+>
+make_generic(
+	majutsu::dispatch_type<
+		majutsu::raw::fundamental<
+			Type
+		>
+	>,
+	majutsu::dispatch_type<
+		Stream
+	>,
+	majutsu::raw::stream::reference<
+		Stream
+	> _stream
+)
+{
+	Type ret;
+
+	majutsu::raw::stream::read<
+		Stream
+	>(
+		_stream,
+		majutsu::raw::static_size<
+			majutsu::raw::fundamental<
+				Type
+			>
+		>::value,
+		fcppt::cast::to_char_ptr<
+			majutsu::raw::pointer
+		>(
+			&ret
+		)
+	);
+
+	return
+		majutsu::raw::stream::return_if<
+			Stream,
+			majutsu::raw::fundamental<
+				Type
+			>
+		>(
+			_stream,
+			ret
+		);
 }
 
 }

@@ -103,6 +103,7 @@ set(
 	include/majutsu/raw/is_constant.hpp
 	include/majutsu/raw/is_static_size.hpp
 	include/majutsu/raw/make.hpp
+	include/majutsu/raw/make_generic.hpp
 	include/majutsu/raw/needed_size.hpp
 	include/majutsu/raw/needed_size_static.hpp
 	include/majutsu/raw/place.hpp
@@ -116,6 +117,15 @@ set(
 	include/majutsu/raw/record_variadic_fwd.hpp
 	include/majutsu/raw/size_type.hpp
 	include/majutsu/raw/static_size.hpp
+	include/majutsu/raw/stream/istream.hpp
+	include/majutsu/raw/stream/istream_fwd.hpp
+	include/majutsu/raw/stream/memory.hpp
+	include/majutsu/raw/stream/memory_fwd.hpp
+	include/majutsu/raw/stream/read.hpp
+	include/majutsu/raw/stream/reference.hpp
+	include/majutsu/raw/stream/result.hpp
+	include/majutsu/raw/stream/return_if.hpp
+	include/majutsu/raw/write.hpp
 	include/majutsu/role.hpp
 	include/majutsu/role_fwd.hpp
 	include/majutsu/role_init_decl.hpp
