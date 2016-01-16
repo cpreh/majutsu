@@ -1,3 +1,4 @@
+#include <majutsu/get.hpp>
 #include <majutsu/make_role_tag.hpp>
 #include <majutsu/role.hpp>
 #include <majutsu/raw/const_pointer.hpp>
@@ -7,8 +8,7 @@
 #include <majutsu/raw/write.hpp>
 #include <majutsu/raw/stream/istream.hpp>
 #include <majutsu/raw/stream/memory.hpp>
-#include <fcppt/optional/object.hpp>
-#include <fcppt/optional/output.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -31,11 +31,28 @@ MAJUTSU_MAKE_ROLE_TAG(
 	int_role
 );
 
+MAJUTSU_MAKE_ROLE_TAG(
+	record_role
+);
+
 typedef
 majutsu::raw::record_variadic<
 	majutsu::role<
 		int_,
 		int_role
+	>
+>
+inner_record;
+
+typedef
+majutsu::raw::record_variadic<
+	majutsu::role<
+		int_,
+		int_role
+	>,
+	majutsu::role<
+		inner_record,
+		record_role
 	>
 >
 record;
@@ -52,7 +69,11 @@ BOOST_AUTO_TEST_CASE(
 FCPPT_PP_POP_WARNING
 
 	record const test{
-		int_role{} = 42
+		int_role{} = 42,
+		record_role{} =
+			inner_record{
+				int_role{} = 10
+			}
 	};
 
 	std::stringstream stream;
@@ -64,38 +85,44 @@ FCPPT_PP_POP_WARNING
 
 	typedef
 	fcppt::optional::object<
-		int
+		record
 	>
-	optional_int;
+	optional_record;
 
-	optional_int const result{
+	optional_record const result{
 		majutsu::raw::make_generic<
 			majutsu::raw::stream::istream,
-			int_
+			record
 		>(
 			stream
 		)
 	};
 
-	BOOST_CHECK_EQUAL(
-		result,
-		optional_int{
-			42
-		}
+	// TODO: Add record comparison and output
+	BOOST_REQUIRE(
+		result.has_value()
 	);
 
-	optional_int const result2{
+	BOOST_CHECK_EQUAL(
+		majutsu::get<
+			int_role
+		>(
+			result.get_unsafe()
+		),
+		42
+	);
+
+	optional_record const result2{
 		majutsu::raw::make_generic<
 			majutsu::raw::stream::istream,
-			int_
+			record
 		>(
 			stream
 		)
 	};
 
-	BOOST_CHECK_EQUAL(
-		result2,
-		optional_int()
+	BOOST_CHECK(
+		!result2.has_value()
 	);
 }
 
@@ -109,24 +136,32 @@ BOOST_AUTO_TEST_CASE(
 FCPPT_PP_POP_WARNING
 
 	record const test{
-		int_role{} = 42
+		int_role{} = 42,
+		record_role{} =
+			inner_record{
+				int_role{} = 10
+			}
 	};
 
 	majutsu::raw::const_pointer stream(
 		test.data()
 	);
 
-	int const result{
+	record const result{
 		majutsu::raw::make_generic<
 			majutsu::raw::stream::memory,
-			int_
+			record
 		>(
 			stream
 		)
 	};
 
 	BOOST_CHECK_EQUAL(
-		result,
+		majutsu::get<
+			int_role
+		>(
+			result
+		),
 		42
 	);
 }

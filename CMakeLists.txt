@@ -117,6 +117,7 @@ set(
 	include/majutsu/raw/record_variadic_fwd.hpp
 	include/majutsu/raw/size_type.hpp
 	include/majutsu/raw/static_size.hpp
+	include/majutsu/raw/stream/bind.hpp
 	include/majutsu/raw/stream/istream.hpp
 	include/majutsu/raw/stream/istream_fwd.hpp
 	include/majutsu/raw/stream/memory.hpp
@@ -124,6 +125,7 @@ set(
 	include/majutsu/raw/stream/read.hpp
 	include/majutsu/raw/stream/reference.hpp
 	include/majutsu/raw/stream/result.hpp
+	include/majutsu/raw/stream/return.hpp
 	include/majutsu/raw/stream/return_if.hpp
 	include/majutsu/raw/write.hpp
 	include/majutsu/role.hpp
