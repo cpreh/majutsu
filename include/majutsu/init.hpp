@@ -7,7 +7,6 @@
 #ifndef MAJUTSU_INIT_HPP_INCLUDED
 #define MAJUTSU_INIT_HPP_INCLUDED
 
-#include <majutsu/init_types.hpp>
 #include <majutsu/detail/init.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/begin.hpp>
@@ -29,9 +28,8 @@ init(
 )
 {
 	typedef
-	majutsu::init_types<
-		Result
-	>
+	typename
+	Result::all_types
 	types;
 
 	return

@@ -4,21 +4,26 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_RAW_STREAM_ISTREAM_FWD_HPP_INCLUDED
-#define MAJUTSU_RAW_STREAM_ISTREAM_FWD_HPP_INCLUDED
+#ifndef MAJUTSU_ROLE_TO_TAG_HPP_INCLUDED
+#define MAJUTSU_ROLE_TO_TAG_HPP_INCLUDED
+
+#include <majutsu/role_to_tag_tpl.hpp>
 
 
 namespace majutsu
 {
-namespace raw
-{
-namespace stream
-{
 
-struct istream;
+template<
+	typename Type
+>
+using
+role_to_tag
+=
+typename
+majutsu::role_to_tag_tpl<
+	Type
+>::type;
 
-}
-}
 }
 
 #endif

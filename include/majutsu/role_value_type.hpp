@@ -7,20 +7,26 @@
 #ifndef MAJUTSU_ROLE_VALUE_TYPE_HPP_INCLUDED
 #define MAJUTSU_ROLE_VALUE_TYPE_HPP_INCLUDED
 
+#include <majutsu/role_to_type.hpp>
+#include <majutsu/detail/find_role_deref.hpp>
+
 
 namespace majutsu
 {
 
 template<
-	typename Memory,
+	typename Record,
 	typename Role
 >
 using role_value_type
 =
-typename
-Memory:: template role_value_type<
-	Role
->::type;
+majutsu::role_to_type<
+	majutsu::detail::find_role_deref<
+		typename
+		Record::all_types,
+		Role
+	>
+>;
 
 }
 

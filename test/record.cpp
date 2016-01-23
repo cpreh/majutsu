@@ -1,6 +1,6 @@
 #include <majutsu/make_role_tag.hpp>
+#include <majutsu/record.hpp>
 #include <majutsu/role.hpp>
-#include <majutsu/fusion/record.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
@@ -17,7 +17,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
 BOOST_AUTO_TEST_CASE(
-	fusion
+	record
 )
 {
 FCPPT_PP_POP_WARNING
@@ -101,7 +101,7 @@ FCPPT_PP_POP_WARNING
 	);
 
 	typedef
-	majutsu::fusion::record<
+	majutsu::record<
 		boost::mpl::vector5<
 			majutsu::role<
 				int,
@@ -127,9 +127,13 @@ FCPPT_PP_POP_WARNING
 	>
 	my_memory;
 
+	int const arg1{
+		4
+	};
+
 	my_memory test(
 		int_role{} =
-			4,
+			arg1,
 		bool_role{} =
 			true,
 		copy_only_role{} =
@@ -148,11 +152,10 @@ FCPPT_PP_POP_WARNING
 			)
 	);
 
-	BOOST_CHECK(
+	BOOST_CHECK_EQUAL(
 		test.get<
 			int_role
-		>()
-		==
+		>(),
 		4
 	);
 
@@ -162,27 +165,24 @@ FCPPT_PP_POP_WARNING
 		>()
 	);
 
-	BOOST_CHECK(
+	BOOST_CHECK_EQUAL(
 		test.get<
 			nodefault_role
-		>().value()
-		==
+		>().value(),
 		42
 	);
 
-	BOOST_CHECK(
+	BOOST_CHECK_EQUAL(
 		test.get<
 			copy_only_role
-		>().value()
-		==
+		>().value(),
 		42
 	);
 
-	BOOST_CHECK(
+	BOOST_CHECK_EQUAL(
 		*test.get<
 			move_only_role
-		>()
-		==
+		>(),
 		42
 	);
 
@@ -192,11 +192,10 @@ FCPPT_PP_POP_WARNING
 		)
 	);
 
-	BOOST_CHECK(
+	BOOST_CHECK_EQUAL(
 		test2.get<
 			int_role
-		>()
-		==
+		>(),
 		4
 	);
 
@@ -206,11 +205,10 @@ FCPPT_PP_POP_WARNING
 		>()
 	);
 
-	BOOST_CHECK(
+	BOOST_CHECK_EQUAL(
 		*test2.get<
 			move_only_role
-		>()
-		==
+		>(),
 		42
 	);
 }

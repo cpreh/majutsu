@@ -4,21 +4,12 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_RAW_STREAM_MEMORY_FWD_HPP_INCLUDED
-#define MAJUTSU_RAW_STREAM_MEMORY_FWD_HPP_INCLUDED
+#ifndef MAJUTSU_RECORD_HPP_INCLUDED
+#define MAJUTSU_RECORD_HPP_INCLUDED
 
+#include <majutsu/record_decl.hpp>
+#include <majutsu/record_fwd.hpp>
+#include <majutsu/record_impl.hpp>
 
-namespace majutsu
-{
-namespace raw
-{
-namespace stream
-{
-
-struct memory;
-
-}
-}
-}
 
 #endif

@@ -28,7 +28,10 @@ template<
 >
 majutsu::role_init<
 	Tag,
-	Arg
+	typename
+	std::decay<
+		Arg
+	>::type
 >
 majutsu::role_tag<
 	Tag
@@ -39,7 +42,10 @@ majutsu::role_tag<
 	return
 		majutsu::role_init<
 			Tag,
-			Arg
+			typename
+			std::decay<
+				Arg
+			>::type
 		>(
 			std::forward<
 				Arg

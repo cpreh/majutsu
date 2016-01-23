@@ -4,34 +4,42 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_FUSION_RECORD_IMPL_HPP_INCLUDED
-#define MAJUTSU_FUSION_RECORD_IMPL_HPP_INCLUDED
+#ifndef MAJUTSU_RECORD_IMPL_HPP_INCLUDED
+#define MAJUTSU_RECORD_IMPL_HPP_INCLUDED
 
+#include <majutsu/record_decl.hpp>
+#include <majutsu/role_value_type.hpp>
+#include <majutsu/role_to_tag.hpp>
 #include <majutsu/detail/all_initializers.hpp>
 #include <majutsu/detail/find_role.hpp>
 #include <majutsu/detail/index_of.hpp>
-#include <majutsu/fusion/record_decl.hpp>
-#include <majutsu/fusion/detail/expand_initlist.hpp>
+#include <majutsu/detail/init_tuple.hpp>
+#include <majutsu/detail/tag_is_same.hpp>
+#include <fcppt/decltype_sink.hpp>
 #include <fcppt/no_init_fwd.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/adapted/mpl.hpp>
-#include <boost/fusion/container/vector.hpp>
 #include <boost/fusion/sequence/intrinsic/at.hpp>
+#include <boost/mpl/begin.hpp>
 #include <boost/mpl/empty.hpp>
+#include <boost/mpl/end.hpp>
+#include <boost/mpl/find_if.hpp>
+#include <boost/mpl/placeholders.hpp>
 #include <boost/mpl/size.hpp>
 #include <boost/mpl/vector.hpp>
+#include <type_traits>
+#include <tuple>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
-
 
 
 template<
 	typename Types
 >
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::record()
 :
@@ -51,7 +59,7 @@ FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 template<
 	typename Types
 >
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::record(
 	fcppt::no_init const &
@@ -62,7 +70,7 @@ majutsu::fusion::record<
 template<
 	typename Types
 >
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::record(
 	fcppt::no_init &&
@@ -72,29 +80,90 @@ majutsu::fusion::record<
 
 FCPPT_PP_POP_WARNING
 
+
 template<
 	typename Types
 >
 template<
 	typename ...Args
 >
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::record(
 	Args && ..._args
 )
 :
 	elements_(
-		majutsu::fusion::detail::expand_initlist<
-			tuple,
-			all_types
-		>(
-			std::forward<
-				Args
-			>(
-				_args
-			)...
-		)
+		[
+			&_args...
+		]{
+			std::tuple<
+				typename
+				std::decay<
+					Args
+				>::type...
+			> arguments(
+				std::move(
+					_args
+				)...
+			);
+
+			return
+				majutsu::detail::init_tuple<
+					tuple,
+					typename
+					boost::mpl::begin<
+						all_types
+					>::type,
+					typename
+					boost::mpl::end<
+						all_types
+					>::type
+				>(
+					[
+						&arguments
+					](
+						auto const &_role
+					)
+					{
+						typedef
+						boost::mpl::vector<
+							typename
+							std::decay<
+								Args
+							>::type...
+						>
+						vector_type;
+
+						typedef
+						majutsu::detail::index_of<
+							vector_type,
+							typename
+							boost::mpl::find_if<
+								vector_type,
+								majutsu::detail::tag_is_same<
+									majutsu::role_to_tag<
+										FCPPT_DECLTYPE_SINK(
+											_role
+										)
+									>,
+									boost::mpl::_1
+								>
+							>::type
+						>
+						index_type;
+
+						return
+							std::move(
+								std::get<
+									index_type::value
+								>(
+									arguments
+								).value()
+							);
+					}
+				);
+		}()
 	)
 {
 	static_assert(
@@ -122,7 +191,7 @@ majutsu::fusion::record<
 template<
 	typename Types
 >
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::record(
 	record const &
@@ -131,7 +200,7 @@ majutsu::fusion::record<
 template<
 	typename Types
 >
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::record(
 	record &
@@ -140,7 +209,7 @@ majutsu::fusion::record<
 template<
 	typename Types
 >
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::record(
 	record &&
@@ -149,10 +218,10 @@ majutsu::fusion::record<
 template<
 	typename Types
 >
-majutsu::fusion::record<
+majutsu::record<
 	Types
 > &
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::operator=(
 	record const &
@@ -161,10 +230,10 @@ majutsu::fusion::record<
 template<
 	typename Types
 >
-majutsu::fusion::record<
+majutsu::record<
 	Types
 > &
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::operator=(
 	record &&
@@ -173,7 +242,7 @@ majutsu::fusion::record<
 template<
 	typename Types
 >
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::~record()
 {
@@ -186,13 +255,43 @@ template<
 	typename Role
 >
 void
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::set(
-	typename
-	role_value_type<
+	majutsu::role_value_type<
+		this_type,
 		Role
-	>::type _value
+	> const &_value
+)
+{
+	boost::fusion::at<
+		majutsu::detail::index_of<
+			all_types,
+			majutsu::detail::find_role<
+				all_types,
+				Role
+			>
+		>
+	>(
+		elements_
+	) =
+		_value;
+}
+
+template<
+	typename Types
+>
+template<
+	typename Role
+>
+void
+majutsu::record<
+	Types
+>::set(
+	majutsu::role_value_type<
+		this_type,
+		Role
+	> &&_value
 )
 {
 	boost::fusion::at<
@@ -217,13 +316,13 @@ template<
 template<
 	typename Role
 >
-typename
-majutsu::fusion::record<
-	Types
->:: template role_return_type<
+majutsu::role_value_type<
+	majutsu::record<
+		Types
+	>,
 	Role
->::type
-majutsu::fusion::record<
+> const &
+majutsu::record<
 	Types
 >::get() const
 {
@@ -245,10 +344,10 @@ template<
 	typename Types
 >
 typename
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::tuple const &
-majutsu::fusion::record<
+majutsu::record<
 	Types
 >::impl() const
 {

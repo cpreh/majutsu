@@ -8,6 +8,9 @@
 #define MAJUTSU_ROLE_INIT_DECL_HPP_INCLUDED
 
 #include <majutsu/role_init_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <type_traits>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace majutsu
@@ -28,12 +31,24 @@ public:
 	Value
 	value_type;
 
-	explicit
-	role_init(
-		Value
+	static_assert(
+		!std::is_lvalue_reference<
+			value_type
+		>::value,
+		""
 	);
 
-	Value
+	explicit
+	role_init(
+		Value &&
+	);
+
+	explicit
+	role_init(
+		Value const &
+	);
+
+	Value &
 	value();
 private:
 	Value value_;

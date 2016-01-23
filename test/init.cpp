@@ -1,13 +1,10 @@
-#include <majutsu/access_role.hpp>
+#include <majutsu/role_to_type.hpp>
 #include <majutsu/get.hpp>
 #include <majutsu/init.hpp>
 #include <majutsu/make_role_tag.hpp>
 #include <majutsu/role.hpp>
 #include <majutsu/role_value_type.hpp>
-#include <majutsu/fusion/record.hpp>
-#include <majutsu/raw/constant.hpp>
-#include <majutsu/raw/fundamental.hpp>
-#include <majutsu/raw/record.hpp>
+#include <majutsu/record.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -64,13 +61,12 @@ init_test()
 		)
 	);
 
-	BOOST_CHECK(
+	BOOST_CHECK_EQUAL(
 		majutsu::get<
 			int_role
 		>(
 			record
-		)
-		==
+		),
 		42
 	);
 }
@@ -81,54 +77,13 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 
 BOOST_AUTO_TEST_CASE(
-	init_raw
-)
-{
-FCPPT_PP_POP_WARNING
-
-	MAJUTSU_MAKE_ROLE_TAG(
-		constant_role
-	);
-
-	typedef
-	majutsu::raw::fundamental<
-		int
-	>
-	int_;
-
-	typedef
-	majutsu::raw::record<
-		boost::mpl::vector2<
-			majutsu::role<
-				majutsu::raw::constant<
-					int_,
-					10
-				>,
-				constant_role
-			>,
-			majutsu::role<
-				int_,
-				int_role
-			>
-		>
-	>
-	my_memory;
-
-	init_test<
-		my_memory
-	>();
-}
-
-FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
-
-BOOST_AUTO_TEST_CASE(
 	init_fusion
 )
 {
 FCPPT_PP_POP_WARNING
+
 	typedef
-	majutsu::fusion::record<
+	majutsu::record<
 		boost::mpl::vector1<
 			majutsu::role<
 				int,

@@ -21,13 +21,11 @@ majutsu::role_init<
 	Tag,
 	Value
 >::role_init(
-	Value _value
+	Value &&_value
 )
 :
 	value_(
-		std::forward<
-			Value
-		>(
+		std::move(
 			_value
 		)
 	)
@@ -38,18 +36,31 @@ template<
 	typename Tag,
 	typename Value
 >
-Value
+majutsu::role_init<
+	Tag,
+	Value
+>::role_init(
+	Value const &_value
+)
+:
+	value_(
+		_value
+	)
+{
+}
+
+template<
+	typename Tag,
+	typename Value
+>
+Value &
 majutsu::role_init<
 	Tag,
 	Value
 >::value()
 {
 	return
-		std::forward<
-			Value
-		>(
-			value_
-		);
+		value_;
 }
 
 #endif

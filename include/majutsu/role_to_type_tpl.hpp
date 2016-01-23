@@ -4,8 +4,8 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_ACCESS_ROLE_TPL_HPP_INCLUDED
-#define MAJUTSU_ACCESS_ROLE_TPL_HPP_INCLUDED
+#ifndef MAJUTSU_ROLE_TO_TYPE_TPL_HPP_INCLUDED
+#define MAJUTSU_ROLE_TO_TYPE_TPL_HPP_INCLUDED
 
 #include <majutsu/role_fwd.hpp>
 
@@ -16,13 +16,13 @@ namespace majutsu
 template<
 	typename
 >
-struct access_role_tpl;
+struct role_to_type_tpl;
 
 template<
 	typename Type,
 	typename Tag
 >
-struct access_role_tpl<
+struct role_to_type_tpl<
 	majutsu::role<
 		Type,
 		Tag

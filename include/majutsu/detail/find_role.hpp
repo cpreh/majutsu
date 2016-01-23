@@ -7,7 +7,7 @@
 #ifndef MAJUTSU_DETAIL_FIND_ROLE_HPP_INCLUDED
 #define MAJUTSU_DETAIL_FIND_ROLE_HPP_INCLUDED
 
-#include <majutsu/unwrap_role_tpl.hpp>
+#include <majutsu/role_to_tag_tpl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/find_if.hpp>
 #include <boost/mpl/placeholders.hpp>
@@ -30,7 +30,7 @@ typename
 boost::mpl::find_if<
 	Elements,
 	std::is_same<
-		majutsu::unwrap_role_tpl<
+		majutsu::role_to_tag_tpl<
 			boost::mpl::_1
 		>,
 		Role

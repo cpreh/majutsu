@@ -4,10 +4,9 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_DETAIL_INIT_HPP_INCLUDED
-#define MAJUTSU_DETAIL_INIT_HPP_INCLUDED
+#ifndef MAJUTSU_DETAIL_INIT_TUPLE_HPP_INCLUDED
+#define MAJUTSU_DETAIL_INIT_TUPLE_HPP_INCLUDED
 
-#include <majutsu/role_to_tag.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/deref.hpp>
 #include <boost/mpl/next.hpp>
@@ -39,7 +38,7 @@ boost::enable_if<
 	>,
 	Result
 >::type
-init(
+init_tuple(
 	Function const &,
 	Args &&..._args
 )
@@ -70,7 +69,7 @@ boost::disable_if<
 	>,
 	Result
 >::type
-init(
+init_tuple(
 	Function const &_function,
 	Args &&..._args
 )
@@ -83,7 +82,7 @@ init(
 	role;
 
 	return
-		majutsu::detail::init<
+		majutsu::detail::init_tuple<
 			Result,
 			typename
 			boost::mpl::next<
@@ -97,14 +96,12 @@ init(
 			>(
 				_args
 			)...,
-			majutsu::role_to_tag<
-				role
-			>{} =
-				_function(
-					role{}
-				)
+			_function(
+				role{}
+			)
 		);
 }
+
 
 }
 }

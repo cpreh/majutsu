@@ -7,7 +7,7 @@
 #ifndef MAJUTSU_GET_HPP_INCLUDED
 #define MAJUTSU_GET_HPP_INCLUDED
 
-#include <majutsu/role_return_type.hpp>
+#include <majutsu/role_value_type.hpp>
 
 
 namespace majutsu
@@ -18,10 +18,10 @@ template<
 	typename Record
 >
 inline
-majutsu::role_return_type<
+majutsu::role_value_type<
 	Record,
 	Role
->
+> const &
 get(
 	Record const &_arg
 )

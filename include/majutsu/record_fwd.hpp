@@ -4,11 +4,18 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef MAJUTSU_RAW_RECORD_VARIADIC_HPP_INCLUDED
-#define MAJUTSU_RAW_RECORD_VARIADIC_HPP_INCLUDED
+#ifndef MAJUTSU_RECORD_FWD_HPP_INCLUDED
+#define MAJUTSU_RECORD_FWD_HPP_INCLUDED
 
-#include <majutsu/raw/record.hpp>
-#include <majutsu/raw/record_variadic_fwd.hpp>
 
+namespace majutsu
+{
+
+template<
+	typename Type
+>
+class record;
+
+}
 
 #endif

@@ -7,7 +7,7 @@
 #ifndef MAJUTSU_DETAIL_CONTAINS_INITIALIZER_HPP_INCLUDED
 #define MAJUTSU_DETAIL_CONTAINS_INITIALIZER_HPP_INCLUDED
 
-#include <majutsu/unwrap_role.hpp>
+#include <majutsu/role_to_tag.hpp>
 #include <majutsu/detail/tag_is_same.hpp>
 #include <fcppt/mpl/contains_if.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
@@ -35,7 +35,7 @@ struct contains_initializer
 fcppt::mpl::contains_if<
 	Args,
 	majutsu::detail::tag_is_same<
-		majutsu::unwrap_role<
+		majutsu::role_to_tag<
 			Element
 		>,
 		boost::mpl::_1
