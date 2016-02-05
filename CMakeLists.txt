@@ -54,10 +54,7 @@ set(
 	include/majutsu/detail/contains_initializer.hpp
 	include/majutsu/detail/find_role.hpp
 	include/majutsu/detail/find_role_deref.hpp
-	include/majutsu/detail/flatten.hpp
 	include/majutsu/detail/index_of.hpp
-	include/majutsu/detail/init.hpp
-	include/majutsu/detail/init_tuple.hpp
 	include/majutsu/detail/tag_is_same.hpp
 	include/majutsu/get.hpp
 	include/majutsu/init.hpp

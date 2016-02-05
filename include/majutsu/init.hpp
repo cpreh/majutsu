@@ -7,10 +7,12 @@
 #ifndef MAJUTSU_INIT_HPP_INCLUDED
 #define MAJUTSU_INIT_HPP_INCLUDED
 
-#include <majutsu/detail/init.hpp>
+#include <majutsu/role_to_tag.hpp>
+#include <fcppt/tag_type.hpp>
+#include <fcppt/decltype_sink.hpp>
+#include <fcppt/algorithm/vararg_map.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/begin.hpp>
-#include <boost/mpl/end.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -27,24 +29,47 @@ init(
 	Function const &_function
 )
 {
-	typedef
-	typename
-	Result::all_types
-	types;
-
 	return
-		majutsu::detail::init<
-			Result,
+		fcppt::algorithm::vararg_map<
 			typename
-			boost::mpl::begin<
-				types
-			>::type,
-			typename
-			boost::mpl::end<
-				types
-			>::type
+			Result::all_types
 		>(
-			_function
+			[](
+				auto &&... _args
+			){
+				return
+					Result{
+						std::forward<
+							decltype(
+								_args
+							)
+						>(
+							_args
+						)...
+					};
+			},
+			[
+				&_function
+			](
+				auto const _tag
+			)
+			{
+				typedef
+				fcppt::tag_type<
+					FCPPT_DECLTYPE_SINK(
+						_tag
+					)
+				>
+				role;
+
+				return
+					majutsu::role_to_tag<
+						role
+					>{} =
+						_function(
+							role{}
+						);
+			}
 		);
 }
 

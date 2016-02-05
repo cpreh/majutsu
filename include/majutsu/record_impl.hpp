@@ -13,19 +13,18 @@
 #include <majutsu/detail/all_initializers.hpp>
 #include <majutsu/detail/find_role.hpp>
 #include <majutsu/detail/index_of.hpp>
-#include <majutsu/detail/init_tuple.hpp>
 #include <majutsu/detail/tag_is_same.hpp>
 #include <fcppt/decltype_sink.hpp>
 #include <fcppt/no_init_fwd.hpp>
+#include <fcppt/tag_type.hpp>
+#include <fcppt/algorithm/vararg_map.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/adapted/mpl.hpp>
 #include <boost/fusion/sequence/intrinsic/at.hpp>
-#include <boost/mpl/begin.hpp>
 #include <boost/mpl/empty.hpp>
-#include <boost/mpl/end.hpp>
 #include <boost/mpl/find_if.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <boost/mpl/size.hpp>
@@ -109,23 +108,38 @@ majutsu::record<
 			);
 
 			return
-				majutsu::detail::init_tuple<
-					tuple,
-					typename
-					boost::mpl::begin<
-						all_types
-					>::type,
-					typename
-					boost::mpl::end<
-						all_types
-					>::type
+				fcppt::algorithm::vararg_map<
+					all_types
 				>(
+					[](
+						auto &&... _args_inner
+					)
+					{
+						return
+							tuple{
+								std::forward<
+									decltype(
+										_args_inner
+									)
+								>(
+									_args_inner
+								)...
+							};
+					},
 					[
 						&arguments
 					](
-						auto const &_role
+						auto const _tag
 					)
 					{
+						typedef
+						fcppt::tag_type<
+							FCPPT_DECLTYPE_SINK(
+								_tag
+							)
+						>
+						role;
+
 						typedef
 						boost::mpl::vector<
 							typename
@@ -143,9 +157,7 @@ majutsu::record<
 								vector_type,
 								majutsu::detail::tag_is_same<
 									majutsu::role_to_tag<
-										FCPPT_DECLTYPE_SINK(
-											_role
-										)
+										role
 									>,
 									boost::mpl::_1
 								>
