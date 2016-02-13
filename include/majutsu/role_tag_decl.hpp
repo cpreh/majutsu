@@ -22,6 +22,10 @@ template<
 >
 struct role_tag
 {
+	typedef
+	Tag
+	tag;
+
 	template<
 		typename Arg
 	>

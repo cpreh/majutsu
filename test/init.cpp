@@ -5,6 +5,8 @@
 #include <majutsu/role.hpp>
 #include <majutsu/role_value_type.hpp>
 #include <majutsu/record.hpp>
+#include <majutsu/record_comparison.hpp>
+#include <majutsu/record_output.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -68,6 +70,14 @@ init_test()
 			record
 		),
 		42
+	);
+
+	BOOST_CHECK_EQUAL(
+		Record{
+			int_role{} =
+				42
+		},
+		record
 	);
 }
 

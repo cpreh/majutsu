@@ -13,7 +13,7 @@
 #define MAJUTSU_MAKE_ROLE_TAG(\
 	name\
 )\
-struct name ## _tag; \
+struct name ## _tag{}; \
 \
 typedef \
 majutsu::role_tag<\

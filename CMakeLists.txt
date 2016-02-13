@@ -65,9 +65,11 @@ set(
 	include/majutsu/make_role_tag_arg_fwd.hpp
 	include/majutsu/make_role_tag_fwd.hpp
 	include/majutsu/record.hpp
+	include/majutsu/record_comparison.hpp
 	include/majutsu/record_decl.hpp
 	include/majutsu/record_fwd.hpp
 	include/majutsu/record_impl.hpp
+	include/majutsu/record_output.hpp
 	include/majutsu/role.hpp
 	include/majutsu/role_fwd.hpp
 	include/majutsu/role_init_decl.hpp
