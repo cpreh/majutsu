@@ -8,8 +8,8 @@
 #define MAJUTSU_RECORD_IMPL_HPP_INCLUDED
 
 #include <majutsu/record_decl.hpp>
-#include <majutsu/role_value_type.hpp>
 #include <majutsu/role_to_tag.hpp>
+#include <majutsu/role_value_type.hpp>
 #include <majutsu/detail/all_initializers.hpp>
 #include <majutsu/detail/find_role.hpp>
 #include <majutsu/detail/index_of.hpp>
@@ -29,8 +29,8 @@
 #include <boost/mpl/placeholders.hpp>
 #include <boost/mpl/size.hpp>
 #include <boost/mpl/vector.hpp>
-#include <type_traits>
 #include <tuple>
+#include <type_traits>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 

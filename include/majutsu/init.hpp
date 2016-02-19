@@ -8,8 +8,8 @@
 #define MAJUTSU_INIT_HPP_INCLUDED
 
 #include <majutsu/role_to_tag.hpp>
-#include <fcppt/tag_type.hpp>
 #include <fcppt/decltype_sink.hpp>
+#include <fcppt/tag_type.hpp>
 #include <fcppt/algorithm/vararg_map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>

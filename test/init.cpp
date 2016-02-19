@@ -1,12 +1,12 @@
-#include <majutsu/role_to_type.hpp>
 #include <majutsu/get.hpp>
 #include <majutsu/init.hpp>
 #include <majutsu/make_role_tag.hpp>
-#include <majutsu/role.hpp>
-#include <majutsu/role_value_type.hpp>
 #include <majutsu/record.hpp>
 #include <majutsu/record_comparison.hpp>
 #include <majutsu/record_output.hpp>
+#include <majutsu/role.hpp>
+#include <majutsu/role_to_type.hpp>
+#include <majutsu/role_value_type.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>

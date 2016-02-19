@@ -8,8 +8,8 @@
 #define MAJUTSU_RECORD_COMPARISON_HPP_INCLUDED
 
 #include <majutsu/get.hpp>
-#include <majutsu/role_to_tag.hpp>
 #include <majutsu/record_impl.hpp>
+#include <majutsu/role_to_tag.hpp>
 #include <fcppt/decltype_sink.hpp>
 #include <fcppt/tag_type.hpp>
 #include <fcppt/algorithm/all_of.hpp>

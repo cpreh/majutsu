@@ -7,8 +7,8 @@
 #ifndef MAJUTSU_RECORD_DECL_HPP_INCLUDED
 #define MAJUTSU_RECORD_DECL_HPP_INCLUDED
 
-#include <majutsu/role_to_type_tpl.hpp>
 #include <majutsu/record_fwd.hpp>
+#include <majutsu/role_to_type_tpl.hpp>
 #include <majutsu/role_value_type.hpp>
 #include <fcppt/no_init_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
