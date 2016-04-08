@@ -8,8 +8,8 @@
 #define MAJUTSU_INIT_HPP_INCLUDED
 
 #include <majutsu/role_to_tag.hpp>
-#include <fcppt/decltype_sink.hpp>
 #include <fcppt/tag_type.hpp>
+#include <fcppt/use.hpp>
 #include <fcppt/algorithm/vararg_map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -54,9 +54,13 @@ init(
 				auto const _tag
 			)
 			{
+				FCPPT_USE(
+					_tag
+				);
+
 				typedef
 				fcppt::tag_type<
-					FCPPT_DECLTYPE_SINK(
+					decltype(
 						_tag
 					)
 				>

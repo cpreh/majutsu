@@ -10,10 +10,10 @@
 #include <majutsu/get.hpp>
 #include <majutsu/record_impl.hpp>
 #include <majutsu/role_to_tag.hpp>
-#include <fcppt/decltype_sink.hpp>
 #include <fcppt/tag_type.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/type_name_from_info.hpp>
+#include <fcppt/use.hpp>
 #include <fcppt/algorithm/loop.hpp>
 #include <fcppt/algorithm/loop_break_mpl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -48,10 +48,14 @@ operator<<(
 			auto const _role
 		)
 		{
+			FCPPT_USE(
+				_role
+			);
+
 			typedef
 			majutsu::role_to_tag<
 				fcppt::tag_type<
-					FCPPT_DECLTYPE_SINK(
+					decltype(
 						_role
 					)
 				>

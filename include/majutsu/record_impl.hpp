@@ -14,9 +14,9 @@
 #include <majutsu/detail/find_role.hpp>
 #include <majutsu/detail/index_of.hpp>
 #include <majutsu/detail/tag_is_same.hpp>
-#include <fcppt/decltype_sink.hpp>
 #include <fcppt/no_init_fwd.hpp>
 #include <fcppt/tag_type.hpp>
+#include <fcppt/use.hpp>
 #include <fcppt/algorithm/vararg_map.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -132,9 +132,13 @@ majutsu::record<
 						auto const _tag
 					)
 					{
+						FCPPT_USE(
+							_tag
+						);
+
 						typedef
 						fcppt::tag_type<
-							FCPPT_DECLTYPE_SINK(
+							decltype(
 								_tag
 							)
 						>
