@@ -115,9 +115,7 @@ set(
 	TRUE
 )
 
-fcppt_utils_generate_config(
-	FALSE
-)
+fcppt_utils_generate_config()
 
 install(
 	DIRECTORY
