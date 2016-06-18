@@ -1,6 +1,6 @@
 cmake_minimum_required(
 	VERSION
-	2.8.12
+	3.0.0
 )
 
 project(
@@ -38,14 +38,6 @@ find_package(
 find_package(
 	fcppt
 	REQUIRED
-)
-
-include_directories(
-	${fcppt_INCLUDE_DIRS}
-)
-
-include_directories(
-	include
 )
 
 set(
@@ -110,9 +102,26 @@ if(
 	)
 endif()
 
-set(
-	FCPPT_UTILS_NO_TARGETS
-	TRUE
+add_library(
+	majutsu_interface
+	INTERFACE
+)
+
+target_include_directories(
+	majutsu_interface
+	INTERFACE
+	"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include>"
+	"$<INSTALL_INTERFACE:${INSTALL_INCLUDE_DIR}>"
+)
+
+target_link_libraries(
+	majutsu_interface
+	INTERFACE
+	fcppt_core_interface
+)
+
+fcppt_utils_export_install_target(
+	majutsu_interface
 )
 
 fcppt_utils_generate_config()

@@ -1,4 +1,7 @@
-set(
-	majutsu_INCLUDE_DIRS
-	"@Boost_INCLUDE_DIRS@;@fcppt_INCLUDE_DIRS@;@majutsu_INCLUDE_DIR@"
+include(
+	FcpptExport
+)
+
+fcppt_export_init(
+	"majutsu"
 )

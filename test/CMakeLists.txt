@@ -5,6 +5,9 @@ function(
 	fcppt_utils_add_test(
 		${FILENAME}
 		${ARGN}
+		LINK_LIBS
+			majutsu_interface
+			fcppt_core_interface
 	)
 endfunction()
 
