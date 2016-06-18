@@ -86,6 +86,10 @@ fcppt_utils_add_source_groups(
 fcppt_utils_add_dummy_target(
 	majutsu
 	"${MAJUTSU_FILES}"
+	INCLUDE_DIRS
+		"${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include"
+	LINK_LIBS
+		fcppt_core_interface
 )
 
 fcppt_utils_set_target_compiler_flags(
